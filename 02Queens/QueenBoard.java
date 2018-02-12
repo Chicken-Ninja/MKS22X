@@ -25,7 +25,6 @@ public class QueenBoard {
 		board[r][counter] -=1;}
 	    for(int counter = 1; r + counter < board.length && c + counter < board.length; counter ++ ) {
 		board[r+counter][c+counter] -=1;}
-	    //TOP LEFT
 	    
 	    return true;}
     }
@@ -46,10 +45,38 @@ public class QueenBoard {
 		   
 
     public boolean solve() {
-	return solveHelper(0 , 0);}
+	if (solveHelper(0) == true) {return true;}
+	else{
+	    for(int counter = 0; counter < board.length; counter ++ )
+		for(int stepper = 0; stepper < board.length; stepper ++ )
+		    board[stepper][counter] = 0;
+	    return false; }
+    
+    }
 
-    public boolean solveHelper( int col , int row) {
+    public boolean solveHelper( int col ) {
+	if(col == board.length) {return true;}
+	for(int counter = 0; counter < board.length; counter ++ ) {
+	    
+	    if(addQueen(counter , col)) {
+		if(solveHelper(col + 1)) {return true;}
+	    }
+	    else if(counter == board.length) {
+		removeQueen(counter , col);
+		return false;}
+	    else{removeQueen(counter, col);
+		
+	    
+		
+	    }}
+	return true;}
+	    
+	    
+	    
 	
+    
+
+		
 
     public int countSolutions() {return 0 ;}
 }
