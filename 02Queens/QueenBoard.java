@@ -45,7 +45,7 @@ public class QueenBoard {
 		   
 
     public boolean solve() {
-	if (solveHelper(0) == true) {return true;}
+	if (solveHelper(0 , 0) == true) {return true;}
 	else{
 	    for(int counter = 0; counter < board.length; counter ++ )
 		for(int stepper = 0; stepper < board.length; stepper ++ )
@@ -54,22 +54,38 @@ public class QueenBoard {
     
     }
 
-    public boolean solveHelper( int col ) {
-	if(col == board.length) {return true;}
+    public boolean solveHelper( int col , int row ) {
+	if(col == board.length && row == board.length) {if(addQueen(row , col) == false){return false;} else
+		{return true;}}
+	if(row == board.length) {return solveHelper(0 , col + 1);}
+	else{return addQueen(row , col) || solveHelper(row + 1, col);}
+    }
+	
+
+
+
+
+/*	if(col <= board.length - 1) {
 	for(int counter = 0; counter < board.length; counter ++ ) {
-	    
-	    if(addQueen(counter , col)) {
-		if(solveHelper(col + 1)) {return true;}
-	    }
-	    else if(counter == board.length) {
-		removeQueen(counter , col);
-		return false;}
-	    else{removeQueen(counter, col);
+	    if(counter == board.length && addQueen(counter, col) == false) {return false;} 
+	    else {addQueen(counter , col);
+		return solveHelper(col + 1);}
+	    //   if(addQueen(counter , col)) {
+	    //if(solveHelper(col + 1)) {return true;}
+	    //}
+	    // else if(counter >= board.length) {
+	    //    {return false;}
+	    // }
+	    //	}
 		
-	    
+	}
+	}return true;
+	}*/ 
+
 		
-	    }}
-	return true;}
+	
+	
+	
 	    
 	    
 	    
