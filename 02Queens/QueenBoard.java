@@ -9,24 +9,71 @@ public class QueenBoard {
 	else {board[r][c] = -1;
 	    for(int counter = c + 1; counter < board.length; counter ++) {
 		board[r][counter] += 1;}
-	    //(UP) HORIZONTAL
+	    //(UP) right 
 	    for(int counter = 1; r + counter < board.length && c + counter < board.length; counter ++) {
 		board[r + counter][c + counter] += 1;}
-	    for(int counter = 1; r + counter < board.length; counter ++) {
-		board[counter][c] +=1;}
+	    //up down
+	    for(int counter = 1; c + counter < board.length  && r - counter > 0; counter++ ) {
+		board[r - counter][c + counter] += 1;}
+	    //up right 
+	    for(int counter = r - 1; counter > 0; counter++ ) {
+		board[counter][c] += 1;}
+	    //up
+	    for(int counter = c - 1; counter > 0; counter ++ ) {
+		board[r][counter] += 1;}
+	    //left
+	    for(int counter = 1; c + counter < board.length && r + counter < board.length; counter++ ) {
+		board[r + counter][c+ counter] += 1;}
+	    //down right
+	    for(int counter = r + 1; counter < board.length; counter ++ ) {
+		board[counter][c] += 1;}
+		
+	    //up right
+	    for(int counter = 1; c - counter > 0 && r + counter < board.length; counter++ ) {
+		board[r + counter][c - counter] += 1;}
+	    //bottom left 
+	    // for(int counter = c - 1; counter > 0; counter++ ) {
+	    //	board[counter][c];}
+	    //for(int counter = r - 1; counter < board.length; counter++ ) {
+	    //		board[counter][c];}
+	    // for(int counter = r - 1; counter < board.length; counter++ ) {
+	    //board[counter][c];}
+
+
 	    //BOTTOM RIGHT 
 	    
-	    return true; }
+	    return true; }}
 	
-    }
+
 
     public boolean removeQueen(int r , int c) {
 	if(board[r][c] >= 0) {return false;}
         else{board[r][c] = 0;
-	    for(int counter = c + 1; counter < board.length; counter ++ ) {
-		board[r][counter] -=1;}
-	    for(int counter = 1; r + counter < board.length && c + counter < board.length; counter ++ ) {
-		board[r+counter][c+counter] -=1;}
+	    for(int counter = c + 1; counter < board.length; counter ++) {
+		board[r][counter] -= 1;}
+	    //(UP) right 
+	    for(int counter = 1; r + counter < board.length && c + counter < board.length; counter ++) {
+		board[r + counter][c + counter] -= 1;}
+	    //up down
+	    for(int counter = 1; c + counter < board.length  && r - counter > 0; counter++ ) {
+		board[r - counter][c + counter] -= 1;}
+	    //up right 
+	    for(int counter = r - 1; counter > 0; counter++ ) {
+		board[counter][c] -= 1;}
+	    //up
+	    for(int counter = c - 1; counter > 0; counter ++ ) {
+		board[r][counter] -= 1;}
+	    //left
+	    for(int counter = 1; c + counter < board.length && r + counter < board.length; counter++ ) {
+		board[r + counter][c+ counter] -= 1;}
+	    //down right
+	    for(int counter = r + 1; counter < board.length; counter ++ ) {
+		board[counter][c] -= 1;}
+	    //up right
+	    for(int counter = 1; c - counter > 0 && r + counter < board.length; counter++ ) {
+		board[r + counter][c - counter] -= 1;}
+	    //down left
+	    
 	    
 	    return true;}
     }
@@ -47,25 +94,55 @@ public class QueenBoard {
 		   
 
     public boolean solve() {
-	if (solveHelper(0 , 0) == true) {return true;}
-	else{
-	    for(int counter = 0; counter < board.length; counter ++ )
-		for(int stepper = 0; stepper < board.length; stepper ++ )
-		    board[stepper][counter] = 0;
-	    return false; }
-    
+	boolean dump = false; 
+	for(int counter = 0; counter < board.length; counter++ ) {
+	    for(int stepper = 0; stepper < board.length; stepper ++) {
+		addQueen(stepper , counter);
+		if(solveHelper(0 , 0)) {return true;}
+		System.out.println(toString());
+		for(int stuff = 0; stuff < board.length; stuff ++ ) {
+		    for(int spoodle = 0; spoodle < board.length; spoodle++ )
+			removeQueen(spoodle, stuff);}
+	    }
+	    
+	}
+	return dump;
     }
+									       
+
+
+
+
+	/*	boolean dump = false;
+	for(int counter = 0; counter < board.length; counter ++) {
+	    for(int stepper = 0; stepper < board.length; stepper++ ) {
+		dump = dump || solveHelper(stepper , counter);
+		if(dump == true) {return true;}
+		for(int bla = 0; bla < board.length;bla ++ ) {
+		    for(int bleh = 0; bleh < board.length; bleh ++ )
+			removeQueen(bla , bleh);}}
+	}
+	return dump;
+	}*/
+	   
+
+
+
+	
+       
+    
+
 
     public boolean solveHelper( int row , int col ) {
-	if(col == board.length && row == board.length) {if(addQueen(row , col) == false){return false;}
-	    else{return true;}}
-	if(addQueen(row , col) && col == board.length) {return true;} 
+	//if(col == board.length && row == board.length) {if(addQueen(row , col) == false){return false;}
+	//   else{return true;}}
+	if(col == board.length - 1 && addQueen(row , col) ) {return true;} 
 	
 	if(addQueen(row ,col)) {
 	    System.out.println(toString());
 	    return solveHelper(0 , col + 1);}
 	
-	else{if(addQueen(row , col) == false && row == board.length) {return false;}
+	else{if(row == board.length - 1 && addQueen(row , col) == false) {return false;}
 	    System.out.println(toString());
 	    return solveHelper(row + 1, col);}
     
