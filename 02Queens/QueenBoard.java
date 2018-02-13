@@ -12,6 +12,8 @@ public class QueenBoard {
 	    //(UP) HORIZONTAL
 	    for(int counter = 1; r + counter < board.length && c + counter < board.length; counter ++) {
 		board[r + counter][c + counter] += 1;}
+	    for(int counter = 1; r + counter < board.length; counter ++) {
+		board[counter][c] +=1;}
 	    //BOTTOM RIGHT 
 	    
 	    return true; }
@@ -54,11 +56,21 @@ public class QueenBoard {
     
     }
 
-    public boolean solveHelper( int col , int row ) {
-	if(col == board.length && row == board.length) {if(addQueen(row , col) == false){return false;} else
-		{return true;}}
-	if(row == board.length) {return solveHelper(0 , col + 1);}
-	else{return addQueen(row , col) || solveHelper(row + 1, col);}
+    public boolean solveHelper( int row , int col ) {
+	if(col == board.length && row == board.length) {if(addQueen(row , col) == false){return false;}
+	    else{return true;}}
+	if(addQueen(row , col) && col == board.length) {return true;} 
+	
+	if(addQueen(row ,col)) {
+	    System.out.println(toString());
+	    return solveHelper(0 , col + 1);}
+	
+	else{if(addQueen(row , col) == false && row == board.length) {return false;}
+	    System.out.println(toString());
+	    return solveHelper(row + 1, col);}
+    
+		
+    
     }
 	
 
