@@ -13,13 +13,13 @@ public class QueenBoard {
 	    for(int counter = 1; r + counter < board.length && c + counter < board.length; counter ++) {
 		board[r + counter][c + counter] += 1;}
 	    //up down
-	    for(int counter = 1; c + counter < board.length  && r - counter > 0; counter++ ) {
+	    for(int counter = 1; c + counter < board.length  && r - counter >= 0; counter++ ) {
 		board[r - counter][c + counter] += 1;}
 	    //up right 
-	    for(int counter = r - 1; counter > 0; counter-- ) {
+	    for(int counter = r - 1; counter >= 0; counter-- ) {
 		board[counter][c] += 1;}
 	    //up
-	    for(int counter = c - 1; counter > 0; counter -- ) {
+	    for(int counter = c - 1; counter >= 0; counter -- ) {
 		board[r][counter] += 1;}
 	    //left
 	    for(int counter = 1; c + counter < board.length && r + counter < board.length; counter++ ) {
@@ -29,7 +29,7 @@ public class QueenBoard {
 		board[counter][c] += 1;}
 		
 	    //up right
-	    for(int counter = 1; c - counter > 0 && r + counter < board.length; counter++ ) {
+	    for(int counter = 1; c - counter >= 0 && r + counter < board.length; counter++ ) {
 		board[r + counter][c - counter] += 1;}
 	    //bottom left 
 	    // for(int counter = c - 1; counter > 0; counter++ ) {
@@ -49,28 +49,28 @@ public class QueenBoard {
     public boolean removeQueen(int r , int c) {
 	if(board[r][c] >= 0) {return false;}
         else{board[r][c] = 0;
-	    for(int counter = c + 1; counter < board.length; counter ++) {
+	    for(int counter = c + 1; counter < board.length ; counter ++) {
 		board[r][counter] -= 1;}
 	    //(UP) right 
-	    for(int counter = 1; r + counter < board.length && c + counter < board.length; counter ++) {
+	    for(int counter = 1; r + counter < board.length  && c + counter < board.length ; counter ++) {
 		board[r + counter][c + counter] -= 1;}
 	    //up down
-	    for(int counter = 1; c + counter < board.length  && r - counter > 0; counter++ ) {
+	    for(int counter = 1; c + counter < board.length   && r - counter >= 0; counter++ ) {
 		board[r - counter][c + counter] -= 1;}
 	    //up right 
-	    for(int counter = r - 1; counter > 0; counter-- ) {
+	    for(int counter = r - 1; counter >= 0; counter-- ) {
 		board[counter][c] -= 1;}
 	    //up
-	    for(int counter = c - 1; counter > 0; counter-- ) {
+	    for(int counter = c - 1; counter >= 0; counter-- ) {
 		board[r][counter] -= 1;}
 	    //left
-	    for(int counter = 1; c + counter < board.length && r + counter < board.length; counter++ ) {
+	    for(int counter = 1; c + counter < board.length  && r + counter < board.length; counter++ ) {
 		board[r + counter][c+ counter] -= 1;}
 	    //down right
 	    for(int counter = r + 1; counter < board.length; counter ++ ) {
 		board[counter][c] -= 1;}
 	    //up right
-	    for(int counter = 1; c - counter > 0 && r + counter < board.length; counter++ ) {
+	    for(int counter = 1; c - counter >= 0 && r + counter < board.length; counter++ ) {
 		board[r + counter][c - counter] -= 1;}
 	    //down left
 	    
@@ -85,7 +85,7 @@ public class QueenBoard {
 	for( int counter = 0; counter < board.length; counter++ )
 	    {for( int stepper = 0; stepper < board.length; stepper++ ) {
 		    if(board[counter][stepper] < 0) {dump = dump + " " + "Q";}
-		    //if(board[counter][stepper] >= 1) {dump = dump + " " + "X";}
+		    if(board[counter][stepper] >= 1) {dump = dump + " " + "X";}
 		    else if(board[counter][stepper] >= 0) {dump = dump + " " + "_"; }}
 		    dump = dump + '\n' ;}
 		return dump; 
@@ -187,5 +187,15 @@ public class QueenBoard {
 
 		
 
-    public int countSolutions() {return 0 ;}
+    public int countSolutions() {
+	int dump = 0;
+    for(int counter = 0; counter < board.length; counter++ ) {
+	    for(int stepper = 0; stepper < board.length; stepper ++) {
+		addQueen(stepper , counter);
+		if(solveHelper(0 , 0)) {dump = dump + 1;}
+		else{reset();}
+	    }
+	}
+	return dump;
+    }
 }
