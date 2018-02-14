@@ -9,6 +9,7 @@ public class Driver {
 	System.out.println(a.addQueen(3,0));
 	System.out.println(a.addQueen(0,0));
 	System.out.println(a.removeQueen(3 ,0));*/
+	//System.out.println(a.solveHelper(0 , 0));
 	System.out.println(a.solve());
 	System.out.println(a.toString());
 	

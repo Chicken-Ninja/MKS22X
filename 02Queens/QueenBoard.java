@@ -16,10 +16,10 @@ public class QueenBoard {
 	    for(int counter = 1; c + counter < board.length  && r - counter > 0; counter++ ) {
 		board[r - counter][c + counter] += 1;}
 	    //up right 
-	    for(int counter = r - 1; counter > 0; counter++ ) {
+	    for(int counter = r - 1; counter > 0; counter-- ) {
 		board[counter][c] += 1;}
 	    //up
-	    for(int counter = c - 1; counter > 0; counter ++ ) {
+	    for(int counter = c - 1; counter > 0; counter -- ) {
 		board[r][counter] += 1;}
 	    //left
 	    for(int counter = 1; c + counter < board.length && r + counter < board.length; counter++ ) {
@@ -58,10 +58,10 @@ public class QueenBoard {
 	    for(int counter = 1; c + counter < board.length  && r - counter > 0; counter++ ) {
 		board[r - counter][c + counter] -= 1;}
 	    //up right 
-	    for(int counter = r - 1; counter > 0; counter++ ) {
+	    for(int counter = r - 1; counter > 0; counter-- ) {
 		board[counter][c] -= 1;}
 	    //up
-	    for(int counter = c - 1; counter > 0; counter ++ ) {
+	    for(int counter = c - 1; counter > 0; counter-- ) {
 		board[r][counter] -= 1;}
 	    //left
 	    for(int counter = 1; c + counter < board.length && r + counter < board.length; counter++ ) {
@@ -90,30 +90,33 @@ public class QueenBoard {
 		    dump = dump + '\n' ;}
 		return dump; 
     }
+    public void reset() {
+	for(int counter = 0; counter < board.length; counter ++ ) {
+	    for( int stepper = 0; stepper < board.length; stepper++) {
+		removeQueen(stepper , counter);
+	    }
+	}
+    }
     
 		   
 
     public boolean solve() {
-	boolean dump = false; 
+		boolean dump = false; 
 	for(int counter = 0; counter < board.length; counter++ ) {
 	    for(int stepper = 0; stepper < board.length; stepper ++) {
 		addQueen(stepper , counter);
 		if(solveHelper(0 , 0)) {return true;}
-		System.out.println(toString());
-		for(int stuff = 0; stuff < board.length; stuff ++ ) {
-		    for(int spoodle = 0; spoodle < board.length; spoodle++ )
-			removeQueen(spoodle, stuff);}
+		else{reset();}
 	    }
-	    
 	}
 	return dump;
     }
-									       
+										       
 
 
 
 
-	/*	boolean dump = false;
+	/*boolean dump = false;
 	for(int counter = 0; counter < board.length; counter ++) {
 	    for(int stepper = 0; stepper < board.length; stepper++ ) {
 		dump = dump || solveHelper(stepper , counter);
@@ -136,6 +139,7 @@ public class QueenBoard {
     public boolean solveHelper( int row , int col ) {
 	//if(col == board.length && row == board.length) {if(addQueen(row , col) == false){return false;}
 	//   else{return true;}}
+	if(board[row][col] == -1) {return solveHelper(0 , col + 1);}
 	if(col == board.length - 1 && addQueen(row , col) ) {return true;} 
 	
 	if(addQueen(row ,col)) {
