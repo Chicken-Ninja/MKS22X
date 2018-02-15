@@ -192,12 +192,30 @@ public class QueenBoard {
     for(int counter = 0; counter < board.length - 1; counter++ ) {
 	    for(int stepper = 0; stepper < board.length - 1; stepper ++) {
 		addQueen(stepper , counter);
-		if(solveHelper(0 , 0)) {dump = dump + 1;
+		dump += countHelper(0 , 0);
 		    System.out.println(toString());
 		}		reset();
 	    }
-    }
+    
     reset();
-    return dump / 2;
-    }
+    return dump / 2;}
+
+
+
+      public int countHelper( int row , int col ) {
+	  int dump = 0;
+	//if(col == board.length && row == board.length) {if(addQueen(row , col) == false){return false;}
+	//   else{return true;}}
+	if(board[row][col] == -1) {return countHelper(0 , col + 1);}
+	if(col == board.length - 1 && addQueen(row , col) ) {dump += 1;} 
+	
+	if(addQueen(row ,col)) {
+	    //System.out.println(toString());
+	    return countHelper(0 , col + 1);}
+	
+	else if(row == board.length - 1 && addQueen(row , col) == false) {return 0;}
+	    //System.out.println(toString());
+	else{return countHelper(row + 1, col);}
+	return dump;}
+    
 }
