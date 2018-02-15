@@ -11,8 +11,9 @@ public class Driver {
 	System.out.println(a.removeQueen(3 ,0));*/
 	//System.out.println(a.solveHelper(0 , 0));
 	//System.out.println(a.solve());
-	System.out.println(a.countSolutions());
-	System.out.println(a.toString());
+	//System.out.println(a.countSolutions());
+	//System.out.println(a.toString());
+	System.out.println(a.countHelper(0 , 0));
 	
 	
 	
