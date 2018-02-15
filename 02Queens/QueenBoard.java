@@ -143,16 +143,16 @@ public class QueenBoard {
 	if(col == board.length - 1 && addQueen(row , col) ) {return true;} 
 	
 	if(addQueen(row ,col)) {
-	    System.out.println(toString());
+	    //System.out.println(toString());
 	    return solveHelper(0 , col + 1);}
 	
-	else{if(row == board.length - 1 && addQueen(row , col) == false) {return false;}
-	    System.out.println(toString());
-	    return solveHelper(row + 1, col);}
+	else if(row == board.length - 1 && addQueen(row , col) == false) {return false;}
+	    //System.out.println(toString());
+	else{    return solveHelper(row + 1, col);}}
     
 		
     
-    }
+
 	
 
 
@@ -189,13 +189,15 @@ public class QueenBoard {
 
     public int countSolutions() {
 	int dump = 0;
-    for(int counter = 0; counter < board.length; counter++ ) {
-	    for(int stepper = 0; stepper < board.length; stepper ++) {
+    for(int counter = 0; counter < board.length - 1; counter++ ) {
+	    for(int stepper = 0; stepper < board.length - 1; stepper ++) {
 		addQueen(stepper , counter);
-		if(solveHelper(0 , 0)) {dump = dump + 1;}
-		else{reset();}
+		if(solveHelper(0 , 0)) {dump = dump + 1;
+		    System.out.println(toString());
+		}		reset();
 	    }
-	}
-	return dump;
+    }
+    reset();
+    return dump / 2;
     }
 }
