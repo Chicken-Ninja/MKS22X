@@ -1,37 +1,45 @@
 public class QueenBoard {
     private int[][] board ;
+    public int dump = 0; 
     public QueenBoard(int size) {
 	board = new int[size][size];}
 
-    public /*PRIVATE */  boolean addQueen( int r , int c) {
+    public boolean addQueen( int r , int c) {
 	if(board[r][c] > 0){ return false; }
 	if(board[r][c] < 0) {return false; }
 	else {board[r][c] = -1;
 	    for(int counter = c + 1; counter < board.length; counter ++) {
 		board[r][counter] += 1;}
-	    //(UP) right 
+	    // right 
+
 	    for(int counter = 1; r + counter < board.length && c + counter < board.length; counter ++) {
 		board[r + counter][c + counter] += 1;}
-	    //up down
+	    //down right
+
 	    for(int counter = 1; c + counter < board.length  && r - counter >= 0; counter++ ) {
 		board[r - counter][c + counter] += 1;}
 	    //up right 
+
 	    for(int counter = r - 1; counter >= 0; counter-- ) {
 		board[counter][c] += 1;}
 	    //up
+
 	    for(int counter = c - 1; counter >= 0; counter -- ) {
 		board[r][counter] += 1;}
 	    //left
-	    for(int counter = 1; c + counter < board.length && r + counter < board.length; counter++ ) {
-		board[r + counter][c+ counter] += 1;}
-	    //down right
+
+	    for(int counter = 1; c - counter >= 0 && r - counter >= 0; counter++ ) {
+		board[r - counter][c - counter] += 1;}
+	    //up left
+
 	    for(int counter = r + 1; counter < board.length; counter ++ ) {
 		board[counter][c] += 1;}
-		
-	    //up right
+	    // down
+
 	    for(int counter = 1; c - counter >= 0 && r + counter < board.length; counter++ ) {
 		board[r + counter][c - counter] += 1;}
-	    //bottom left 
+	    //down left 
+
 	    // for(int counter = c - 1; counter > 0; counter++ ) {
 	    //	board[counter][c];}
 	    //for(int counter = r - 1; counter < board.length; counter++ ) {
@@ -51,25 +59,32 @@ public class QueenBoard {
         else{board[r][c] = 0;
 	    for(int counter = c + 1; counter < board.length ; counter ++) {
 		board[r][counter] -= 1;}
-	    //(UP) right 
+	    //(UP) right
+ 
 	    for(int counter = 1; r + counter < board.length  && c + counter < board.length ; counter ++) {
 		board[r + counter][c + counter] -= 1;}
-	    //up down
+	    //down right
+
 	    for(int counter = 1; c + counter < board.length   && r - counter >= 0; counter++ ) {
 		board[r - counter][c + counter] -= 1;}
 	    //up right 
+
 	    for(int counter = r - 1; counter >= 0; counter-- ) {
 		board[counter][c] -= 1;}
 	    //up
+
 	    for(int counter = c - 1; counter >= 0; counter-- ) {
 		board[r][counter] -= 1;}
 	    //left
-	    for(int counter = 1; c + counter < board.length  && r + counter < board.length; counter++ ) {
-		board[r + counter][c+ counter] -= 1;}
-	    //down right
+
+	    for(int counter = 1; c - counter >= 0  && r - counter >= 0; counter++ ) {
+		board[r - counter][c- counter] -= 1;}
+	    //up left 
+
 	    for(int counter = r + 1; counter < board.length; counter ++ ) {
 		board[counter][c] -= 1;}
-	    //up right
+	    //down 
+
 	    for(int counter = 1; c - counter >= 0 && r + counter < board.length; counter++ ) {
 		board[r + counter][c - counter] -= 1;}
 	    //down left
@@ -188,28 +203,140 @@ public class QueenBoard {
 		
 
     public int countSolutions() {
-	int dump = 0;
-    for(int counter = 0; counter < board.length - 1; counter++ ) {
-	    for(int stepper = 0; stepper < board.length - 1; stepper ++) {
-		addQueen(stepper , counter);
-		dump += countHelper(0 , 0);
-		    System.out.println(toString());
-		}		reset();
-	    }
-    
-    reset();
-    return dump / 2;}
+	
+	return countHelper(0 , 0);
+    }
 
 
 
       public int countHelper( int row , int col ) {
+	  //System.out.print(row);
+	  //System.out.println(" " + col);
+	  //System.out.println(toString());
 	  int dump = 0;
-	  int temp = 0;
-	  if( col == board.length - 1 && row == board.length - 1 && addQueen(row , col)) {temp += 1;
+	  if( col == board.length - 1) {
+	      if( row == board.length - 1) {
+		  if(addQueen(row , col)) {
+		      dump += 1;
+		      removeQueen(row , col);
+		      return dump;
+		  }
+		  if(!addQueen(row , col)) {
+		      return dump;
+		  }
+	      }
+	      else{
+		  if(addQueen(row , col)) {
+		      dump += 1;
+		      removeQueen(row , col); 
+		      return countHelper(row + 1 , col) + dump;
+		  }
+		  if(!addQueen(row , col)) {
+		      return countHelper(row + 1, col) + dump;
+		  }
+	      }
+	  }
+	  else{
+	      if(row == board.length - 1 && addQueen(row, col)) {
+		  int nextCol = countHelper(0, col+1);
+		  removeQueen(row, col);
+		  return nextCol + dump;
+	      }
+	      if(row == board.length - 1 && !addQueen(row , col)) {
+		  return 0 + dump; 
+	      }
+	      else {
+		  if(addQueen(row ,col)){
+		      int nextCol = countHelper(0 , col + 1);
+		      removeQueen(row, col);
+		      int nextRow = countHelper(row + 1 , col); 
+		      return nextCol + nextRow + dump;
+		  }
+		  if(!addQueen(row , col)) {
+		      return countHelper(row + 1, col) + dump;
+		  
+		  }
+	      }
+		  //}
+	  }
+	  reset();
+	  return dump; 
+      }
+
+}       
+	  
+	 	 
+	  
+
+
+
+
+
+
+
+
+
+/*	  if(col == board.length - 1 && row == board.length - 1 && addQueen(row , col)) 
+	      {dump += 1;
+		  removeQueen(row , col); }
+	      
+	  else if(col == board.length - 1 && addQueen(row , col)){
+	      dump += 1; 
+	      removeQueen(row , col); 
+	      countHelper(row + 1, col);}
+	 
+	  else if(col < board.length - 1) {
+	      boolean thing = false; 
+	      for(int counter = 0; counter <= board.length - 1 ; counter++) {
+		  if(counter == board.length - 1 && addQueen(counter, col))
+		      {thing = thing || true;
+			  countHelper(0 , col + 1);}
+		  if(counter == board.length - 1 && !addQueen(counter ,col) && thing == false){
+		      break;}
+	      
+		  
+		      
+		  else if(addQueen(counter, col)){
+		      thing = thing || true; 
+		      countHelper(0 , col + 1); 
+		      removeQueen(counter, col);}
+	      
+		  System.out.println(toString());
+	      }
+	  }
+	  //System.out.println(toString());
+	  return dump;}
+}
+	      // System.out.println(toString());
+	
+	      */
+	      
+	      
+	      
+	  
+	
+		  
+	      
+	  
+      
+      
+	
+
+
+
+
+
+
+
+
+
+
+
+	  /*if( col == board.length - 1 && row == board.length - 1 && addQueen(row , col)) {yeet = true;
 	      dump += 1;
 	      System.out.println(toString());}
 	  if( col == board.length - 1 && addQueen(row , col)) {dump += 1;
-	      temp += 1;
+	      yeet = true; 
 	      System.out.println(toString());
 	      removeQueen(row , col);
 	      countHelper(row + 1, col);
@@ -219,12 +346,11 @@ public class QueenBoard {
 	      if(addQueen(counter , col)){
 		  countHelper(0 , col + 1);
 		  // System.out.println(toString());
-	      if(temp == 0) {removeQueen(counter , col);}
-	      else{temp = 0;}}
-	  }}
+		  if(yeet == false) {removeQueen(counter , col);}
+	      }yeet = false; }
 	  return dump;}
-	      
-	      
+	  return 694;}	      
+	  */
 	  
     
-}
+
