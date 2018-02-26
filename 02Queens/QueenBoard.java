@@ -1,6 +1,6 @@
 public class QueenBoard {
     private int[][] board ;
-    public int dump = 0; 
+    // public int dump = 0; 
     public QueenBoard(int size) {
 	board = new int[size][size];}
 
