@@ -1,7 +1,7 @@
 public class KnightBoard {
     private int[][] board; 
     public int[][] moves;
-    public int counter = 0; 
+    public int moof = 0; 
 
     public KnightBoard (int rows , int cols) {
 
@@ -52,10 +52,15 @@ public class KnightBoard {
 	return dump;
     }
 
+    public boolean outOfBounds(int startingRow, int startingCol) {
+	try{board[startingRow][startingCol] += 0;} 
+	catch(ArrayIndexOutOfBoundsException e) {return true;} 
+    }
+
 
     public boolean solve(int startingRow , int startingCol) {
 	//If the board filled 
-	int isFilled = true; 
+	Boolean isFilled = true; 
 	for(int counter = 0; counter < board.length - 1; counter ++ ) 
 	    {for (int stepper = 0; stepper < board.length - 1; stepper ++) 
 		    {if(board[stepper][counter] == 0)  
@@ -64,11 +69,16 @@ public class KnightBoard {
 	    }
 	if(isFilled = true) {return true;}
 	
-	for(int counter = 0; counter < 
-		    
+	for(int counter = 0; counter < moves.length - 1; counter ++ ) {
+	    //Out of Bounds
+	    if(outOfBounds(startingRow + moves[0][counter] ,startingCol + moves[1][counter])) 
+		{return false;}
+	}
+	
 	
 		    
 
+    }
 }
     
 
