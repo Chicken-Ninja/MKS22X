@@ -28,16 +28,36 @@ public class Maze{
 	    
 	    while(b.hasNext()){
 		String line = b.nextLine();
-		AMAZEING +=  (line);
-		AMAZEING += "\n";
+		int rowCount = 0;
+		int colCount = 0;
+	        for(int counter = 0; counter <= line.length(); counter++ )
+		    {
+			if(counter == line.length()) {
+			    maze[rowCount][colCount + 1] = line.charAt(counter); 
+			    rowCount+=1;
+			    colCount = 0;
+			}
+			else{maze[rowCount][colCount + 1] = line.charAt(counter);
+			    colCount += 1;
+			}
 	       
-		
-	    }}catch(FileNotFoundException e){
+		    }
+	    }
+	
+	}catch(FileNotFoundException e){
 		System.out.println("File not found" + fileName);
 		System.exit(1);}
-        System.out.println(AMAZEING);
+    //System.out.println(AMAZEING);
+    for(int counter = 0; counter < maze.length - 1; counter++) {
+	for(int stepper = 0; stepper < maze.length - 1; stepper++ ) {
+	    AMAZEING = AMAZEING + maze[counter][stepper];
+	}}
+    System.out.println(AMAZEING);
 	
     }
+    
+	
+
 
 		
 
