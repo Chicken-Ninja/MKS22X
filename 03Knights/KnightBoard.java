@@ -70,15 +70,48 @@ public class KnightBoard {
 				
 		    }
 	    }
-	System.out.println(isFilled); 
+	//System.out.println(isFilled); 
     
 	if(isFilled == true) {return true;}
+
+
+	
+	if(board[startingRow + moves[0][0]][startingCol + moves[0][1]] != 0 &&
+	   board[startingRow + moves[1][0]][startingCol + moves[1][1]] != 0 &&
+	   board[startingRow + moves[2][0]][startingCol + moves[2][1]] != 0 &&
+	   board[startingRow + moves[3][0]][startingCol + moves[3][1]] != 0 &&
+	   board[startingRow + moves[4][0]][startingCol + moves[4][1]] != 0 &&
+	   board[startingRow + moves[5][0]][startingCol + moves[5][1]] != 0 &&
+	   board[startingRow + moves[6][0]][startingCol + moves[6][1]] != 0 &&
+	   board[startingRow + moves[7][0]][startingCol + moves[7][1]] != 0 )
+	    {return false;}
 	else{
-	for(int counter = 0; counter < moves.length - 1; counter ++ ) {
-	    if(startingRow + moves[0][counter] > board.length - 1 || startingRow + moves[1][counter] < 0 || startingCol + moves[1][counter] > board[0].length - 1 ||  startingCol + moves[1][counter] < 0) 
+	    for(int counter = 0; counter < moves.length - 1; counter ++ )
+		
+		{if(board[startingRow + moves[counter][0]][startingCol + moves[counter][1]] == 0)
+			{if(solve(startingRow + moves[counter][0] , startingCol + moves[counter][1]))
+				{return true;}
+			    else{board[startingRow + moves[counter][0]][startingCol + moves[counter][1]] = 0;}
+			}
+		}
+	}
+	return false; 
+    }
+}
+	   
+				   
+		   
+
+
+
+
+
+
+	    /*if(startingRow + moves[0][counter] > board.length - 1 && startingRow + moves[1][counter] < 0 && startingCol + moves[1][counter] > board[0].length - 1 &&  startingCol + moves[1][counter] < 0) 
 		//{return false;} 
 	    //if(outOfBounds(startingRow + moves[0][counter] ,startingCol + moves[1][counter])) 
-	    	{System.out.println("OUTOFBOUNDS");}
+	    	{System.out.println("OUTOFBOUNDS");
+		    return false;}
 	    else if (board[startingRow  + moves [0][counter]][startingCol + moves[1] [counter]] != 0) 
 		{System.out.println("TAKEN");}
 	    else if (board[startingRow + moves[0][counter]] [startingCol + moves[1][counter]] == 0)
@@ -100,7 +133,7 @@ public class KnightBoard {
 	}
 	return false;
     }
-}
+    }*/
     
 
     
