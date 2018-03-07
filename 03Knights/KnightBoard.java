@@ -1,7 +1,7 @@
 public class KnightBoard {
     private int[][] board; 
     public int[][] moves;
-    public int moof = 0; 
+    public int moof = 1; 
 
     public KnightBoard (int rows , int cols) {
 
@@ -16,7 +16,7 @@ public class KnightBoard {
 			board[stepper][counter] = 0;
 		    }
 	    }
-	
+    
 
 
 
@@ -44,6 +44,7 @@ public class KnightBoard {
 		    if(board[counter][stepper] < 0) 
 			{throw new IllegalArgumentException();}
 		    if(board[counter][stepper] == 0) {dump = dump + "_";}
+		    else{dump = dump + board[counter][stepper];}
 		    dump += " ";
 		    
 		}
@@ -55,6 +56,7 @@ public class KnightBoard {
     public boolean outOfBounds(int startingRow, int startingCol) {
 	try{board[startingRow][startingCol] += 0;} 
 	catch(ArrayIndexOutOfBoundsException e) {return true;} 
+	return false;
     }
 
 
@@ -64,20 +66,39 @@ public class KnightBoard {
 	for(int counter = 0; counter < board.length - 1; counter ++ ) 
 	    {for (int stepper = 0; stepper < board.length - 1; stepper ++) 
 		    {if(board[stepper][counter] == 0)  
-			    {isFilled = false;}
+			    {isFilled = false;} 
+				
 		    }
 	    }
-	if(isFilled = true) {return true;}
-	
+	System.out.println(isFilled); 
+    
+	if(isFilled == true) {return true;}
+	else{
 	for(int counter = 0; counter < moves.length - 1; counter ++ ) {
-	    //Out of Bounds
-	    if(outOfBounds(startingRow + moves[0][counter] ,startingCol + moves[1][counter])) 
-		{return false;}
+	    if(startingRow + moves[0][counter] > board.length - 1 || startingRow + moves[1][counter] < 0 || startingCol + moves[1][counter] > board[0].length - 1 ||  startingCol + moves[1][counter] < 0) 
+		//{return false;} 
+	    //if(outOfBounds(startingRow + moves[0][counter] ,startingCol + moves[1][counter])) 
+	    	{System.out.println("OUTOFBOUNDS");}
+	    else if (board[startingRow  + moves [0][counter]][startingCol + moves[1] [counter]] != 0) 
+		{System.out.println("TAKEN");}
+	    else if (board[startingRow + moves[0][counter]] [startingCol + moves[1][counter]] == 0)
+		{
+		    board[startingRow + moves[0][counter]] [startingCol + moves[1][counter]] = moof;
+		    moof += 1;
+		    if(solve(startingRow + moves[0][counter] , startingCol + moves[1][counter]) == false) {
+		    board[startingRow + moves[0][counter]] [startingCol + moves[1][counter]] = 0;}
+		    else{return true;}
+		
+		}
 	}
+	
+	    
 	
 	
 		    
 
+	}
+	return false;
     }
 }
     
