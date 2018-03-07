@@ -9,8 +9,10 @@ public class Driver {
 	System.out.println(a.fib(3));
 	System.out.println(a.fib(4));
 	System.out.println(a.fib(5));
-	System.out.println(a.fib(6));
+	System.out.println(a.fib(6)); 
 	System.out.println(a.sqrt(4));
+	System.out.println(a.sqrt (0)) ;
+	System.out.println(a.sqrt (-1));
 	
     }
 }
