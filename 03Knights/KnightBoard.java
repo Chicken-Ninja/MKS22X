@@ -43,8 +43,9 @@ public class KnightBoard {
 		{
 		    if(board[counter][stepper] < 0) 
 			{throw new IllegalArgumentException();}
-		    if(board[counter][stepper] == 0) {dump = dump + "_";}
-		    else{dump = dump + board[counter][stepper];}
+		    dump += board[counter][stepper];
+		    //if(board[counter][stepper] == 0) {dump = dump + "_";}
+		    //else{dump = dump + board[counter][stepper];}
 		    dump += " ";
 		    
 		}
@@ -59,23 +60,25 @@ public class KnightBoard {
 	return false;
     }
 
-
-    public boolean solve(int startingRow , int startingCol) {
-	//If the board filled 
-	Boolean isFilled = true; 
-	for(int counter = 0; counter < board.length - 1; counter ++ ) 
-	    {for (int stepper = 0; stepper < board.length - 1; stepper ++) 
-		    {if(board[stepper][counter] == 0)  
-			    {isFilled = false;} 
-				
+    public boolean isFilled() {
+	for(int counter = 0; counter < board.length - 1; counter++ ) 
+	    {for(int stepper = 0; stepper < board[0].length - 1; stepper ++) 
+		    {if( board[counter][stepper] == 0) {return false;}
 		    }
 	    }
-	//System.out.println(isFilled); 
-    
-	if(isFilled == true) {return true;}
+	return true;
+    }
 
 
+    public boolean solve(int startingRow , int startingCol) {
 	
+
+	if(isFilled()) {return true;} 
+	
+	
+
+
+
 	if(board[startingRow + moves[0][0]][startingCol + moves[0][1]] != 0 &&
 	   board[startingRow + moves[1][0]][startingCol + moves[1][1]] != 0 &&
 	   board[startingRow + moves[2][0]][startingCol + moves[2][1]] != 0 &&
@@ -85,22 +88,30 @@ public class KnightBoard {
 	   board[startingRow + moves[6][0]][startingCol + moves[6][1]] != 0 &&
 	   board[startingRow + moves[7][0]][startingCol + moves[7][1]] != 0 )
 	    {return false;}
+
 	else{
 	    for(int counter = 0; counter < moves.length - 1; counter ++ )
-		
-		{if(board[startingRow + moves[counter][0]][startingCol + moves[counter][1]] == 0)
-			{if(solve(startingRow + moves[counter][0] , startingCol + moves[counter][1]))
+		{if(!outOfBounds(startingRow + moves[counter][0] , startingCol + moves[counter][1]))
+			{
+			    if(board[startingRow + moves[counter][0]][startingCol + moves[counter][1]] == 0)
+				{
+				    board[startingRow + moves[counter][0]][startingCol + moves[counter][1]] = moof;
+				    moof +=1;
+				    
+				    if(solve(startingRow + moves[counter][0] , startingCol + moves[counter][1]))
 				{return true;}
-			    else{board[startingRow + moves[counter][0]][startingCol + moves[counter][1]] = 0;}
+				    else{board[startingRow + moves[counter][0]][startingCol + moves[counter][1]] = 0;}
 			}
-		}
+			}
 	}
-	return false; 
+	     
+	}
+	return true;
     }
 }
-	   
+    
 				   
-		   
+    
 
 
 
