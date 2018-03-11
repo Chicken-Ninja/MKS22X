@@ -37,13 +37,13 @@ public class KnightBoard {
 
     public String toString() {
 	String dump = ""; 
-	for(int counter = 0; counter < board[0].length - 1; counter ++ ) 
+	for(int counter = 0; counter < moves[0].length - 1; counter ++ ) 
 	    {
-	    for(int stepper = 0; stepper < board.length - 1;stepper ++ ) 
+	    for(int stepper = 0; stepper < moves.length - 1;stepper ++ ) 
 		{
-		    if(board[counter][stepper] < 0) 
+		    if(moves[counter][stepper] < 0) 
 			{throw new IllegalArgumentException();}
-		    dump += board[counter][stepper];
+		    dump += moves[counter][stepper];
 		    //if(board[counter][stepper] == 0) {dump = dump + "_";}
 		    //else{dump = dump + board[counter][stepper];}
 		    dump += " ";
