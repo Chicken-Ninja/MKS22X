@@ -9,7 +9,7 @@ public class KnightBoard {
 	    throw new IllegalArgumentException();
 	}
 	
-	board = new int[rows + 1][cols + 1];
+		board = new int[rows + 1][cols + 1];
 	for(int counter = 0; counter <= cols; counter ++ ) 
 	    {for(int stepper = 0; stepper <= rows; stepper++) 
 		    {
@@ -18,32 +18,37 @@ public class KnightBoard {
 	    }
     
 
+	
 
 
+	moves = new int[][] { {1,2}, {1,-2}, 
+			{2,1}, {2,-1},
+			{-1,2}, {-1,-2},
+			{-2,1}, {-2,-1} };
 
 
+	
 
-
-	int[][] moves = new int[2][8];
+	/*	int[][] moves = new int[2][8];
 	int[] x = {1 , 2 , -1 , -2 , 1 , 2 , -1 , -2};
 	int[] y = {2 , 1 , 2 , 1 , -2 , -1, -2 , -1};
 	moves[0] = x; 
 	moves[1] = y;
-
+	*/
     }
-    
+
 
 
 
     public String toString() {
 	String dump = ""; 
-	for(int counter = 0; counter < moves[0].length - 1; counter ++ ) 
+	for(int counter = 0; counter < board[0].length - 1; counter ++ ) 
 	    {
-	    for(int stepper = 0; stepper < moves.length - 1;stepper ++ ) 
+	    for(int stepper = 0; stepper < board.length - 1;stepper ++ ) 
 		{
-		    if(moves[counter][stepper] < 0) 
+		    if(board[counter][stepper] < 0) 
 			{throw new IllegalArgumentException();}
-		    dump += moves[counter][stepper];
+		    dump += board[counter][stepper];
 		    //if(board[counter][stepper] == 0) {dump = dump + "_";}
 		    //else{dump = dump + board[counter][stepper];}
 		    dump += " ";
@@ -71,15 +76,42 @@ public class KnightBoard {
 
 
     public boolean solve(int startingRow , int startingCol) {
+	if(board[startingRow][startingCol] == 0) 
+	    {board[startingRow][startingCol] = moof;
+		moof+=1;
+	    }
 	
 
 	if(isFilled()) {return true;} 
-	
-	
+	//System.out.println(toString());
+	for(int counter = 0; counter < moves.length - 1; counter++)
+	    {
+		if(outOfBounds(startingRow + moves[counter][0] , startingCol + moves[counter][1]) == false)
+		    {
+			if(board[startingRow + moves [counter][0]][startingCol + moves[counter][1]] == 0)
+			    {
+				board[startingRow + moves[counter][0]][startingCol + moves[counter][1]] = moof;
+				moof +=1;
+				
+				if(solve(startingRow + moves[counter][0] , startingCol + moves[counter][1]))
+				    {
+					return true;}
+				moof -=1;
+				board[startingRow + moves[counter][0]][startingCol + moves[counter][1]] = 0;
+				
+				
+			    }
+		}
+	    }
+	return false;
+    }
+    
+}
+		    
 
 
 
-	if(board[startingRow + moves[0][0]][startingCol + moves[0][1]] != 0 &&
+							    /*	if(board[startingRow + moves[0][0]][startingCol + moves[0][1]] != 0 &&
 	   board[startingRow + moves[1][0]][startingCol + moves[1][1]] != 0 &&
 	   board[startingRow + moves[2][0]][startingCol + moves[2][1]] != 0 &&
 	   board[startingRow + moves[3][0]][startingCol + moves[3][1]] != 0 &&
@@ -106,7 +138,7 @@ public class KnightBoard {
 	}
 	     
 	}
-	return true;
+	return false;
     }
 }
     
