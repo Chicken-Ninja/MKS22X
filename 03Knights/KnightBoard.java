@@ -9,9 +9,9 @@ public class KnightBoard {
 	    throw new IllegalArgumentException();
 	}
 	
-		board = new int[rows + 1][cols + 1];
-	for(int counter = 0; counter <= cols; counter ++ ) 
-	    {for(int stepper = 0; stepper <= rows; stepper++) 
+		board = new int[rows][cols];
+	for(int counter = 0; counter < cols ; counter ++ ) 
+	    {for(int stepper = 0; stepper < rows; stepper++) 
 		    {
 			board[stepper][counter] = 0;
 		    }
@@ -42,9 +42,9 @@ public class KnightBoard {
 
     public String toString() {
 	String dump = ""; 
-	for(int counter = 0; counter < board[0].length - 1; counter ++ ) 
+	for(int counter = 0; counter < board[0].length; counter ++ ) 
 	    {
-	    for(int stepper = 0; stepper < board.length - 1;stepper ++ ) 
+	    for(int stepper = 0; stepper < board.length;stepper ++ ) 
 		{
 		    if(board[counter][stepper] < 0) 
 			{throw new IllegalArgumentException();}
@@ -66,8 +66,8 @@ public class KnightBoard {
     }
 
     public boolean isFilled() {
-	for(int counter = 0; counter < board.length - 1; counter++ ) 
-	    {for(int stepper = 0; stepper < board[0].length - 1; stepper ++) 
+	for(int counter = 0; counter < board.length; counter++ ) 
+	    {for(int stepper = 0; stepper < board[0].length; stepper ++) 
 		    {if( board[counter][stepper] == 0) {return false;}
 		    }
 	    }
@@ -84,7 +84,7 @@ public class KnightBoard {
 
 	if(isFilled()) {return true;} 
 	//System.out.println(toString());
-	for(int counter = 0; counter < moves.length - 1; counter++)
+	for(int counter = 0; counter < moves.length; counter++)
 	    {
 		if(outOfBounds(startingRow + moves[counter][0] , startingCol + moves[counter][1]) == false)
 		    {
@@ -105,7 +105,10 @@ public class KnightBoard {
 	    }
 	return false;
     }
-    
+
+
+
+
 }
 		    
 
