@@ -106,6 +106,19 @@ public class KnightBoard {
 	return false;
     }
 
+    public int countSolutions ( int r , int c) {
+	int dump = 0; 
+	if(moof == 1) 
+	    {
+		board[r][c] = moof;
+		moof ++;
+	       
+	    } 
+	if(isFilled()){dump += 1;
+	    return dump;}
+    }
+    
+	
 
 
 
