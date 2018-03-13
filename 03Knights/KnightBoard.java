@@ -38,8 +38,15 @@ public class KnightBoard {
     }
 
 
-
-
+    public void clear() {
+	for(int counter = 0 ; counter < board[0].length; counter++ )
+	    {
+		for (int stepper = 0; stepper < board.length; stepper++) 
+		    {
+			board[counter][stepper] = 0;}
+	    }
+    }
+    
     public String toString() {
 	String dump = ""; 
 	for(int counter = 0; counter < board[0].length; counter ++ ) 
@@ -116,14 +123,49 @@ public class KnightBoard {
 	    } 
 	if(isFilled()){dump += 1;
 	    return dump;}
+	for(int counter = 0; counter < moves.length; counter++ ) 
+	    {
+		if(outOfBounds(r + moves[counter][0] , c + moves[counter][1]) == false) 
+		    {
+			if(board[r + moves[counter][0]][c + moves[counter][1]] == 0) 
+			    {
+				board[r + moves[counter][0]][c + moves[counter][1]] = moof;
+				moof ++; 
+				dump = dump + countSolutions(r + moves[counter][0] , c + moves[counter][1]);
+				moof --;
+				board[r + moves[counter][0]][c + moves[counter][1]] = 0;
+			    }
+		    }
+	    
+	    }
+	return dump;
     }
+
+			       			    
+			
+	
+}
     
 	
 
 
 
-}
+
 		    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
