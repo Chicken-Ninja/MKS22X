@@ -1,15 +1,16 @@
 import java.util.*;
 public class Quick{
-    int[]thing;
+   
     int value;
-    Random rand = new Random();
+  
 
    
 
-    public String toString() {
+    public static  String toString(int[] nums) {
 	String dump = ""; 
-	for(int counter = 0; counter < thing.length; counter++ )
-	    {dump = dump + thing[counter];}
+	for(int counter = 0; counter < nums.length; counter++ )
+	    {dump = dump + nums[counter];
+		dump = dump + " ";}
 	return dump;
     }
 
@@ -21,29 +22,45 @@ public class Quick{
 	nums[a] = placeholder;
     }
 
-    public void quickSort(int[] nums) 
-    {
-	int low = 0;
-	int i = low + 1;
-	int high = nums.length - 1; 
-	int v = rand.nextInt(nums.length - 1) + 1; 
-	int bottom = low + 1; 
-	int top = high; 
-	while(i <= top)
+    public static int partition(int[] nums, int start, int end) 
+    { 
+	Random rand = new Random();
+	int i = start;
+	int lt = start;
+	int gt = end; 
+	int pivot =  rand.nextInt(end-start+1) + start;
+	int check = nums[pivot];
+	System.out.println(nums[pivot]);
+	while(i <= gt) 
 	    {
-		if(nums[i] > nums[v]) 
+		System.out.println(toString(nums));
+		System.out.println(i);
+		if(nums[i] == check) 
+		    {i++;}
+	        else if(nums[i] > check) 
 		    {
-			swap(nums,i,low);
-			top--;
+			swap(nums, i, gt);
+			gt --;
 		    }
-		else if(nums[i] < nums[low]) 
-		    {
-			i++;
-		    }
+		else{
+		    swap(nums , i , lt);
+		    i++;
+		    lt++;
+		}
 	    }
-	thing = nums;   
+    
+    return 0;
+    }
+
+    public static void main (String[] args) 
+    {
+	int[]a = new int[] {9999, 0 , 0 , 4 , 3, 99999 , 12 , 400 ,30};
+	Quick.partition(a , 0 , 8);
+	System.out.println(toString(a));
     }
 }
+
 			
+	
 	
 	
