@@ -83,9 +83,10 @@ public class Quick{
     {
 	int v;
 	v = partition(nums , start , end) ;
-	while(start < end) 
+	if(start < end) 
 	    {
-		quickHelp(nums, 0 , v);
+		System.out.println(toString(nums));
+		quickHelp(nums, start , v);
 		quickHelp(nums, v , end);
 	    }
        
