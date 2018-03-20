@@ -12,6 +12,13 @@ public class Merge{
 	return dump; 
     }
 
+    public static void merge(int[]data ,int[]temp , int lo , int mid , int hi)
+    {
+        
+
+    }
+
+    
     public static void mergesort(int[] data)
     {
 	int[]temp = new int[data.length];
@@ -21,6 +28,7 @@ public class Merge{
 
     public static void msort(int[] data, int[] temp , int lo, int hi)
     {
+	mid = lo/2 + hi/2; 
     }
 
 }
