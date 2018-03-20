@@ -24,10 +24,12 @@ public class USACO {
 			}
 			if(counter == 1)
 			 {	      
-				int[][] lake = new int[b.nextInt()][temp];
-				col = b
+				int[][] lake = new int[b.nextInt()][row];
+				col = b.nextInt()
 			}
-			if(counter 
+			if(
+
+			else{counter ++;}
 			
 					   	   
 				  
