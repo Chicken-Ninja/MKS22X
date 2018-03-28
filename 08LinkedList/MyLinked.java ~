@@ -1,0 +1,8 @@
+public class MyLinked {
+       Node first;
+       Node last;
+       int length; 
+
+       public MyLinked {
+       	      
+       	      
