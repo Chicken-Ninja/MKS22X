@@ -27,7 +27,7 @@ public class Node {
     
     public void setPrev(Node a) 
     {
-	prev = a ; 
+	Prev = a ; 
     }
 
     public int getValue() 

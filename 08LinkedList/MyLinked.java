@@ -1,7 +1,7 @@
 public class MyLinked {
-    Node first;
-    Node last;
-    int length; 
+    private Node first;
+    private Node last;
+    private int length; 
     
     public MyLinked()
     {
@@ -24,7 +24,7 @@ public class MyLinked {
     public String toString()
     {
 	String dump = "[";
-	Node temp = start; 
+	Node temp = first; 
 	while(Node.getNext().getValue()!= null) 
 	    {
 		temp = Node.getNext();
@@ -36,7 +36,7 @@ public class MyLinked {
     
     private int get(int index)
     {
-	Node temp = start; 
+	Node temp = first; 
 	for(int counter = 0; counter <= index; counter++ ) 
 	    {
 		temp = temp.getNext();
@@ -50,7 +50,7 @@ public class MyLinked {
     
     private int set(int index, int newValue)
     {
-	Node temp = start;
+	Node temp = first;
 	for(int counter = 0; counter <= index; counter++ )
 	    {
 		
