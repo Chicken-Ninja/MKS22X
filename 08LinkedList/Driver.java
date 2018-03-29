@@ -15,6 +15,10 @@ public class Driver
 	z.add(11);
 	z.add(12);
 	System.out.println(z.toString());
+	System.out.println(z.get(0));
+	System.out.println(z.get(1));
+	
+	System.out.println(z.get(2));
 	
 	
     }

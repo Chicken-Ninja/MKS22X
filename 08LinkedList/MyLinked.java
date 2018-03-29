@@ -37,7 +37,7 @@ public class MyLinked {
 	
     }
     
-    private int size()
+    public int size()
     {
 	return length; 
     }
@@ -56,8 +56,9 @@ public class MyLinked {
 	return dump + "]"; 
     }
     
-    private int get(int index)
+    public int get(int index)
     {
+	
 	Node temp = first; 
 	for(int counter = 0; counter <= index; counter++ ) 
 	    {
@@ -70,7 +71,7 @@ public class MyLinked {
     
 
     
-    private int set(int index, int newValue)
+    public int set(int index, int newValue)
     {
 	int value = 9999;
 	Node temp = first;
