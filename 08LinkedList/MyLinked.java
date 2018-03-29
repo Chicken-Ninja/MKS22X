@@ -9,10 +9,14 @@ public class MyLinked {
     
     public boolean add(int value)
     {
-	Node a = new Node(null , last , value);
+	
+	Node a = new Node(null, last , value);
+	//	a.setValue(value);
+	//a.setNext(null);
+	//a.setPrev(last);
 	last.setNext(a);
 	last = a; 
-	
+	return true;
 	
     }
     
@@ -25,9 +29,9 @@ public class MyLinked {
     {
 	String dump = "[";
 	Node temp = first; 
-	while(Node.getNext().getValue()!= null) 
+	while(temp.getNext()!= null) 
 	    {
-		temp = Node.getNext();
+		temp = temp.getNext();
 		dump = dump + temp.getValue();
 		dump += ","; 
 	    }
@@ -50,24 +54,25 @@ public class MyLinked {
     
     private int set(int index, int newValue)
     {
+	int value = 9999;
 	Node temp = first;
 	for(int counter = 0; counter <= index; counter++ )
 	    {
 		
 		if(counter == index) 
 		    {
-			return temp.getValue();
+			value = temp.getValue();
 		    }
-		if(Node.getNext().getValue() != null) 
+		if(temp.getNext()!= null) 
 		    {
-			temp = Node.getNext();
+			temp = temp.getNext();
 			
 		    }
 		
 		
 		
 	    }
-    
+	return value;
     
     
     }

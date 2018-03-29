@@ -35,7 +35,7 @@ public class Node {
 	return data; 
     }
     
-    public int setValue(int a) 
+    public void setValue(int a) 
     {
 	data = a; 
     }
