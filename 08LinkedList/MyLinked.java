@@ -44,6 +44,59 @@ public class MyLinked {
 
 }
 
+public class Node {
+    Node next;
+    Node Prev; 
+    int data;
+    
+    public Node (Node a, Node b , int c) {
+	next = a; 
+	Prev = b; 
+	data = c; 
+    }
+
+    public Node getNext() 
+    {
+	return next;
+    }
+    
+    public void setNext(Node a) 
+    {
+	next = a; 
+    }
+
+    public Node getPrev() 
+    {
+	return Prev; 
+    }
+    
+    public void setPrev(Node a) 
+    {
+	prev = a ; 
+    }
+
+    public int getValue() 
+    {
+	return data; 
+    }
+    
+    public int setValue(int a) 
+    {
+	data = a; 
+    }
+
+    public String toString() 
+    {
+	String dump = "";
+	return dump + data;
+    }
+	    
+	
+	
+	
+	
+	
+
        
 
 
