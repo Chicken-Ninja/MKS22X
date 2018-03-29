@@ -8,8 +8,14 @@ public class Driver
 	b.setNext(d);
 	System.out.println(c.toString() + b.toString() + d.toString());
 	System.out.println(c.toString() + c.getNext().toString() + b.getNext().toString());
+    
+
+	MyLinked z  = new MyLinked() ;
+	z.add(10);
+	z.add(11);
+	z.add(12);
+	System.out.println(z.toString());
+	
+	
     }
 }
-	//MyLinked a  = new MyLinked() ;
-	
-	

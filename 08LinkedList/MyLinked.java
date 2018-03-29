@@ -1,7 +1,7 @@
 public class MyLinked {
-    private Node first;
-    private Node last;
-    private int length; 
+    private Node first = null;
+    private Node last = null;
+    private int length = 0;
     
     public MyLinked()
     {
@@ -9,13 +9,30 @@ public class MyLinked {
     
     public boolean add(int value)
     {
-	
-	Node a = new Node(null, last , value);
+	if(last == null)
+	    {
+		Node a = new Node(null, null, value);
+		last = a;
+		first = a;
+
+	    }
+	  
+	//	Node a = new Node(null, last , value);
+	//	else if(length == 0)
+	//  {
+	//	Node b = new Node(null, null, value);
+	//	first = b;
+
+	///  }
+	else{
+	    Node c = new Node(null, last, value);
+	    last.setNext(c);
+	    last = c;
+	}
 	//	a.setValue(value);
 	//a.setNext(null);
 	//a.setPrev(last);
-	last.setNext(a);
-	last = a; 
+	
 	return true;
 	
     }
@@ -28,7 +45,8 @@ public class MyLinked {
     public String toString()
     {
 	String dump = "[";
-	Node temp = first; 
+	Node temp = first;
+	dump += temp.getValue() + ",";
 	while(temp.getNext()!= null) 
 	    {
 		temp = temp.getNext();
