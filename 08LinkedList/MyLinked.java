@@ -106,6 +106,27 @@ public class MyLinked {
     
     
     }
+    public int indexOf(int value) 
+    {
+	Node temp = first; 
+	int placeholder = 0; 
+	for(int counter = 0; counter <= length; counter++ ) 
+	    {
+		if(temp.getValue() == value) 
+		    {
+			placeholder = counter;
+			break;
+		    }
+		else if(temp.getValue() != value && counter == length)
+		    {
+			placeholder = -1; 
+		    }
+		else{
+		    temp = temp.getNext(); 
+		}
+	    }
+	return placeholder; 
+    }
 }
 
 
