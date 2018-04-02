@@ -6,7 +6,17 @@ public class MyLinked {
     public MyLinked()
     {
     }
+
+    public void clear() {
+	first = null;
+	last = null; 
+	length = 0; 
+    }
     
+    
+
+
+
     public boolean add(int value)
     {
 	if(last == null)
@@ -60,7 +70,7 @@ public class MyLinked {
     {
 	
 	Node temp = first; 
-	for(int counter = 0; counter <= index; counter++ ) 
+	for(int counter = 0; counter <= index - 1; counter++ ) 
 	    {
 		temp = temp.getNext();
 	    }
@@ -75,12 +85,13 @@ public class MyLinked {
     {
 	int value = 9999;
 	Node temp = first;
-	for(int counter = 0; counter <= index; counter++ )
+	for(int counter = 0; counter <= index ; counter++ )
 	    {
 		
 		if(counter == index) 
 		    {
 			value = temp.getValue();
+			temp.setValue(newValue);
 		    }
 		if(temp.getNext()!= null) 
 		    {

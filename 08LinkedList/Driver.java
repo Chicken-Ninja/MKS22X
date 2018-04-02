@@ -19,6 +19,8 @@ public class Driver
 	System.out.println(z.get(1));
 	
 	System.out.println(z.get(2));
+	System.out.println(z.set(1 , 3));
+	System.out.println(z.toString());
 	
 	
     }
