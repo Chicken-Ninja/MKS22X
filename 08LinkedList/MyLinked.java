@@ -24,7 +24,7 @@ public class MyLinked {
 		Node a = new Node(null, null, value);
 		last = a;
 		first = a;
-
+		
 	    }
 	  
 	//	Node a = new Node(null, last , value);
@@ -39,6 +39,8 @@ public class MyLinked {
 	    last.setNext(c);
 	    last = c;
 	}
+	length++;
+	
 	//	a.setValue(value);
 	//a.setNext(null);
 	//a.setPrev(last);
@@ -109,18 +111,19 @@ public class MyLinked {
     public int indexOf(int value) 
     {
 	Node temp = first; 
-	int placeholder = 0; 
-	for(int counter = 0; counter <= length; counter++ ) 
+	int placeholder = -1;
+	for(int counter = 0; counter <= 3; counter++ ) 
 	    {
+		System.out.println(temp.getValue());
 		if(temp.getValue() == value) 
 		    {
 			placeholder = counter;
 			break;
 		    }
-		else if(temp.getValue() != value && counter == length)
-		    {
-			placeholder = -1; 
-		    }
+		//	else if(temp.getValue() != value && counter == length)
+		//  {
+		//placeholder = -1; 
+		//   }
 		else{
 		    temp = temp.getNext(); 
 		}

@@ -21,7 +21,7 @@ public class Driver
 	System.out.println(z.get(2));
 	//System.out.println(z.set(1 , 3)); TESTING SET 
 	//System.out.println(z.toString()); TESTING SET 
-	System.out.println(z.indexOf(10));
+	//System.out.println(z.indexOf(10));
 	System.out.println(z.indexOf(11));
 	System.out.println(z.indexOf(12));
 	
