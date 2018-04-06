@@ -48,6 +48,75 @@ public class MyLinked {
 	return true;
 	
     }
+
+    public void add(int Index , Integer value)
+    {
+	if(Index > length) 
+	    {
+		throw new IllegalArgumentException();
+	    }
+	else if(Index < 0)
+	    {
+		throw new IllegalArgumentException() ;
+	    }
+	else if(Index == 0 && length == 0)
+	    {
+		//	Node a = new Node(null, null,value);
+		add(value);
+	    }
+	else if(Index == 0) 
+	    {
+		Node a = new Node(first , null, value);
+		first.setPrev(a); 
+		first = a;
+		length++;
+	    }
+	else if(Index == length) 
+	    {
+		Node a = new Node(null, last, value); 
+		last.setNext(a);
+		last = a; 
+		length++;
+	    }
+	else if(Index != 0 && Index != length) 
+	    {
+	    Node temp = first;
+	    Node tempNext = first.getNext();  
+	    System.out.println(toString());
+	   
+	    for(int counter = 1; counter <= length; counter++) 
+		{
+		    if(counter == Index) 
+			{
+			    Node a = new Node(tempNext , temp , value);
+			    temp.setNext(a);
+			    tempNext.setPrev(a);
+			    
+			}
+		    else if(tempNext.getNext() != null)
+			{
+			temp = temp.getNext(); 
+			tempNext = tempNext.getNext();
+			}
+		    System.out.println(toString());
+			    
+		}
+	    length++;
+	    }
+    }
+	
+	    
+		
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     public int size()
     {
@@ -130,6 +199,9 @@ public class MyLinked {
 	    }
 	return placeholder; 
     }
+    
+
+    
 }
 
 
