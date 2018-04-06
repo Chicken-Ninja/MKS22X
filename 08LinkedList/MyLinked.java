@@ -105,9 +105,108 @@ public class MyLinked {
 	    }
     }
 	
-	    
-		
+     public boolean remove(Integer value) 
+    {
+	Node temp = first; 
+	for(int counter = 0; counter <= length; counter ++ ) 
+	    {
+		if(temp.getValue() == value) 
+		    {
+			if(counter == 0)
+			    {
+				temp.getNext().setPrev(null);
+				first = temp.getNext();
+				length--;
+				
+			    }
+			else if(counter == length) 
+			    {
+				temp.getPrev().setNext(null);
+				last = temp.getPrev();
+				length--;
+			    }
+			else{
+			
+				
+			temp.getPrev().setNext(temp.getNext());
+			temp.getNext().setPrev(temp.getPrev());
+			length --; 
+			}
+		    }
+		else
+		    {
+		    temp = temp.getNext();
+		    }
+	    }
+	return false; 
+    }
 
+    
+	
+    
+
+
+
+
+
+
+
+
+
+
+
+		
+    public Integer remove(int index)
+    {
+	Node temp = first; 
+	int placeholder = 99999;
+	
+	if(index > length) 
+	    {
+		throw new IllegalArgumentException();
+	    }
+	if(index < 0) 
+	    {
+		throw new IllegalArgumentException();
+	    }
+        if(index == 0) 
+	    {
+		placeholder = first.getValue();
+		first.getNext().setPrev(null);
+		first = first.getNext();
+		length--;
+		return placeholder;
+	    }
+	else if(index == length) 
+	    {
+		placeholder = last.getValue();
+		
+		last = last.getPrev();
+		last.setNext(null);
+		length--;
+		return placeholder; 
+	    }
+	else{
+	
+	for(int counter = 0; counter <= length; counter ++ ) 
+	    {
+		if(counter == index) 
+		    {
+			placeholder = temp.getValue();
+			temp.getPrev().setNext(temp.getNext()); 
+			temp.getNext().setPrev(temp.getPrev());
+			length--;
+			
+		    }
+		else {
+		    temp = temp.getNext();
+		}
+	
+	    }
+	}
+	return placeholder;
+    }
+	
     
     
     

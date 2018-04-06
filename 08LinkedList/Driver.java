@@ -46,6 +46,13 @@ public class Driver
 	System.out.println(z.get(5));
 	//System.out.println(z.get(6));
 	System.out.println(z.toString());
+	System.out.println(z.remove(3));
+	
+	System.out.println(z.toString());
+	System.out.println(z.remove(0));
+	System.out.println(z.toString());
+	
+	
 	
 	
     }
