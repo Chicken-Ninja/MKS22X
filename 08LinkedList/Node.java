@@ -1,7 +1,7 @@
 public class Node {
     Node Next;
     Node Prev; 
-    int data;
+    Integer data;
     
 
     public Node (Node a, Node b , int c) {

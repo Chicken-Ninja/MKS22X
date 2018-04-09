@@ -17,7 +17,7 @@ public class MyLinked {
 
 
 
-    public boolean add(int value)
+    public boolean add(Integer value)
     {
 	if(last == null)
 	    {
@@ -159,7 +159,7 @@ public class MyLinked {
     public Integer remove(int index)
     {
 	Node temp = first; 
-	int placeholder = 99999;
+	Integer placeholder = 99999;
 	
 	if(index > length) 
 	    {
@@ -236,7 +236,7 @@ public class MyLinked {
 	return dump + "]"; 
     }
     
-    public int get(int index)
+    public Integer get(int index)
     {
 	
 	Node temp = first; 
@@ -251,9 +251,9 @@ public class MyLinked {
     
 
     
-    public int set(int index, int newValue)
+    public Integer set(int index, Integer newValue)
     {
-	int value = 9999;
+	Integer value = 9999;
 	Node temp = first;
 	for(int counter = 0; counter <= index ; counter++ )
 	    {
@@ -279,7 +279,7 @@ public class MyLinked {
     public int indexOf(int value) 
     {
 	Node temp = first; 
-	int placeholder = -1;
+	Integer placeholder = -1;
 	for(int counter = 0; counter <= 3; counter++ ) 
 	    {
 		System.out.println(temp.getValue());
