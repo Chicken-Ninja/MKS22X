@@ -105,14 +105,8 @@ public class MyLinkedListImproved <T extends Comparable<T>> implements Iterable<
 	    length++;
 	    }
     }
-    
-    
-    
-
-
-
-    
-    public boolean remove(T value) 
+	
+     public boolean remove(T value) 
     {
 	Node temp = first; 
 	for(int counter = 0; counter <= length; counter ++ ) 
