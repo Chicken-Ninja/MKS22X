@@ -1,10 +1,10 @@
-public class Node {
+public class Node <T> {
     Node Next;
     Node Prev; 
-    Integer data;
+    T data;
     
 
-    public Node (Node a, Node b , int c) {
+    public Node (Node a, Node b , T c) {
 	Next = a; 
 	Prev = b; 
 	data = c; 
@@ -30,12 +30,12 @@ public class Node {
 	Prev = a ; 
     }
 
-    public int getValue() 
+    public T getValue() 
     {
 	return data; 
     }
     
-    public void setValue(int a) 
+    public void setValue(T a) 
     {
 	data = a; 
     }
