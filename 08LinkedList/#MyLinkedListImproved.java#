@@ -1,3 +1,9 @@
+import java.util.Iterator;
+
+
+
+
+
 public class MyLinkedListImproved <T extends Comparable<T>> implements Iterable<T>
 {
     private Node first = null;
@@ -8,6 +14,12 @@ public class MyLinkedListImproved <T extends Comparable<T>> implements Iterable<
     {
     }
 
+
+    public Iterator<T> iterator()
+    {
+	return new LinkedListIterator(this);
+    }
+    
     public void clear() {
 	first = null;
 	last = null; 
@@ -15,7 +27,7 @@ public class MyLinkedListImproved <T extends Comparable<T>> implements Iterable<
     }
     
     
-
+    
 
 
     public boolean add(T value)
@@ -246,6 +258,7 @@ public class MyLinkedListImproved <T extends Comparable<T>> implements Iterable<
 		temp = temp.getNext();
 	    }
 	return temp.getValue();
+	
     }
     
 			
@@ -352,6 +365,41 @@ public class MyLinkedListImproved <T extends Comparable<T>> implements Iterable<
 	    String dump = "";
 	    return dump + data;
 	}
+    }
+    
+    private class LinkedListIterator implements Iterator <T>
+    {
+	private MyLinkedListImproved a;
+	private Node current;
+
+	public  LinkedListIterator(MyLinkedListImproved<T> thing)
+	{
+	    this.a = thing;
+	    current = thing.first;
+	}
+
+	public T next()
+	{
+	    T temp;
+	    temp = current.getValue();
+	    if(hasNext())
+		{
+		    current = current.getNext();
+		}
+	    else
+		{
+		    System.exit(0);
+		}
+	    return temp;
+	}
+
+	public boolean hasNext()
+	{
+	    return current.getNext() == null;
+	}
+
+	public 
+
     }
     
 }

@@ -11,12 +11,12 @@ public class Driver
     
 
 	MyLinked z  = new MyLinked() ;
-	//	z.add(10);
-	//z.add(11);
-	//	z.add(12);
+		z.add(10);
+		z.add(11);
+		z.add(12);
 	//System.out.println(z.toString());
-	//System.out.println(z.get(0));
-	//System.out.println(z.get(1));
+	System.out.println(z.get(0));
+	System.out.println(z.get(1));
 	
 	//System.out.println(z.get(2));
 	//System.out.println(z.set(1 , 3)); TESTING SET 
