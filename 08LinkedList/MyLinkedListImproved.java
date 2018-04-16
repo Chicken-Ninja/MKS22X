@@ -313,6 +313,101 @@ public class MyLinkedListImproved <T extends Comparable<T>> implements Iterable<
 	    }
 	return placeholder; 
     }
+						
+    public int max ()
+    {
+	if(length == 0) 
+	    {
+		return -1; 
+	    }
+	Node current = first; 
+	Node highest = first; 
+	int maxindex = 0; 
+	for( int counter = 0; counter <= length; counter++)
+	    {
+		if(current.getValue().compareTo(highest.getValue()) == 1)
+		    {
+			maxindex = counter; 
+			highest = current;
+		    }
+		//System.out.println(counter);
+		//System.out.println(highest);
+		//System.out.println(maxindex);
+		
+		if(counter != length - 1) 
+		    {
+			current = current.getNext();
+		    }
+	    }
+	return maxindex;
+    }
+    
+    public int min()
+    {
+	if(length == 0) 
+	    {
+		return -1;
+	    }
+	Node current = first;
+	Node lowest = first; 
+	int minindex = 0;
+	for(int counter = 0; counter <= length; counter++)
+	    {
+		if(current.getValue().compareTo(lowest.getValue()) == -1 )
+		    {
+			minindex = counter; 
+			lowest = current;
+		    }
+		if( counter != length - 1)
+		    {
+			current = current.getNext();
+		    }
+	    }
+	return minindex;
+    }
+    
+    public void extend(MyLinkedListImproved<T> other)
+    {
+	last.setNext(other.first);
+	other.first.setPrev(last);
+	length += other.length;
+	last = other.last; 
+	other.clear();
+    }
+
+    public int digits (MyLinkedListImproved<Integer> data)
+    {
+	int largest = data.get(data.max());
+	String thing = "" + largest; 
+	return thing.length();
+    }
+	
+	
+	
+    public static void radixsort(MyLinkedListImproved<Integer> data) 
+    {
+	int maxDigits = data.digits(data);
+	String[] temp = new String[data.length];
+	static Node current = data.first; 
+	for(int counter = 0; counter < data.length; counter++ )
+	    {
+		temp[counter] = "" + current.getValue();
+		current = current.getNext();
+	    }
+	for(int counter = 0; counter < temp.length; counter++ )
+	    {
+		int distance = maxDigits - temp[counter].length();
+		for(int stepper = 0; stepper < distance; stepper++)
+		    {
+			temp[counter] = "0" + temp[counter];
+		    }
+	    }
+	
+	
+    }
+	
+		    
+	
     
 
     

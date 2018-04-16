@@ -10,7 +10,7 @@ public class Driver
 	System.out.println(c.toString() + c.getNext().toString() + b.getNext().toString());
     
 
-	MyLinked z  = new MyLinked() ;
+	MyLinkedListImproved <Integer>  z  = new MyLinkedListImproved<> () ;
 		z.add(10);
 		z.add(11);
 		z.add(12);
@@ -51,8 +51,19 @@ public class Driver
 	System.out.println(z.toString());
 	System.out.println(z.remove(0));
 	System.out.println(z.toString());
+	System.out.println(z.max());
+	System.out.println(z.min());
 	
 	
+	MyLinkedListImproved <Integer> e = new MyLinkedListImproved<> ();
+	e.add(99);
+	e.add(999);
+	e.add(9999);
+	z.extend(e);
+	System.out.println(z.toString());
+	//System.out.println(e.toString());
+	System.out.println(z.digits(z));
+
 	
 	
     }
