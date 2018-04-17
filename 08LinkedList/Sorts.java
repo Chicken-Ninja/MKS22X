@@ -1,5 +1,48 @@
+import java.util.*;
+import java.util.Arrays;
+
+
+
 public class Sorts 
 {
+    
+    public static void radixsort(MyLinkedListImproved<Integer> data)
+    {
+	int max = data.max();
+	int maxdigits = data.digits(data);
+	for(int counter=  0; counter < maxdigits ; counter++ ) 
+	    {
+		
+		@SupressWarnings("unchecked") MyLinkedListImproved<Integer>[] thing = new MyLinkedListImproved<>[10];
+		for(int stepper = 0; stepper < 10; stepper ++ ) 
+		    {
+			thing[stepper] = new MyLinkedListImproved<Integer>();
+		    }
+		
+		
+    
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     
 	 public int digits (MyLinkedListImproved<Integer> data)
     {
@@ -7,7 +50,7 @@ public class Sorts
 	String thing = "" + largest; 
 	return thing.length();
     }
-
+    /*
     //public MyLinkedListImproved<String>[] sort(MyLinkedListImproved<String> 
 	
 	
@@ -36,4 +79,4 @@ public class Sorts
 	
     }
 }					       
-					       
+    */				       
