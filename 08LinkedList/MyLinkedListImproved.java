@@ -381,6 +381,8 @@ public class MyLinkedListImproved <T extends Comparable<T>> implements Iterable<
 	String thing = "" + largest; 
 	return thing.length();
     }
+
+    public MyLinkedListImproved<String>[] sort(MyLinkedListImproved<String> 
 	
 	
 	
@@ -388,6 +390,8 @@ public class MyLinkedListImproved <T extends Comparable<T>> implements Iterable<
     {
 	int maxDigits = data.digits(data);
 	String[] temp = new String[data.length];
+	MyLinkedListImproved<Integer> datum = new MyLinkedListImproved<>();
+	
 	static Node current = data.first; 
 	for(int counter = 0; counter < data.length; counter++ )
 	    {
@@ -405,6 +409,7 @@ public class MyLinkedListImproved <T extends Comparable<T>> implements Iterable<
 	
 	
     }
+
 	
 		    
 	
