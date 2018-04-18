@@ -1,27 +1,27 @@
 import java.util.LinkedList;
 
-public class Stack <T> 
+public class Stack <Double> 
 {    
-    LinkedList<T> data;
+    LinkedList<Double> data;
 	public Stack ()
     {
-	data = new LinkedList<T>();
+	data = new LinkedList<Double>();
     }
     
-    public void push(T thing)
+    public void push(Double thing)
 	
     {
 	data.add(thing);
 	
     }
-    public T pop ()
+    public double pop ()
     {
 	return data.removeLast();
     }
     
-    public T peek() 
+    public double peek() 
     {
-	return data.get(data.size());
+	return data.get(data.size()- 1);
     }
 }
     
