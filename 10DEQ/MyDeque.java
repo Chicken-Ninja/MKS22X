@@ -40,7 +40,7 @@ public class MyDeque<E> {
     public void addFirst(E thing)
     {
 
-	if(thing == null)
+	if(thing == null)() ==
 	    {
 		throw new IllegalArgumentException();
 	    }
@@ -59,7 +59,19 @@ public class MyDeque<E> {
 		data[first - 1] = thing;
 		first = first - 1;
 	    }
+
     }
+
+    public void addLast(E thing)
+    {
+	if(thing == null)
+	    {
+		throw new IllegalArgumentException();
+	    }
+	else if(last == length && isFull() == false)
+	    {
+		data[0] = thing;
+		
 
 		
 	
