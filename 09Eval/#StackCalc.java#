@@ -1,4 +1,4 @@
-public class eval
+public class StackCalc
 {
     //String data;
     
@@ -6,7 +6,7 @@ public class eval
 
     
 
-    public static double eval(String datum)
+    public double StackCalc(String datum)
     {
         @SuppressWarnings("unchecked") Stack a  = new Stack();
 	String values[] = datum.split(" ");
@@ -19,22 +19,28 @@ public class eval
 		if(values[counter] == "+")
 		    {
 			total += a.pop() + a.pop();
+			a.push(total);
 		    }
 		if(values[counter] == "-")
 		    {
 			total += a.pop() - a.pop();
+			a.push(total);
+			
 		    }
 		if(values[counter] == "*")
 		    {
 			total += a.pop() * a.pop();
+			a.push(total);
 		    }
 		if(values[counter] == "/")
 		    {
 			total += a.pop() / a.pop();
+			a.push(total);
 		    }
 		if(values[counter] == "%")
 		    {
 			total += a.pop() % a.pop();
+			a.push(total);
 		    }
 		else
 		    {
@@ -48,8 +54,8 @@ public class eval
 
     public static void main(String[] args)
     {
-	eval a = new eval();
-	System.out.println(a.eval(" 10 10 10 + +" ));
+	StackCalc a = new StackCalc("10 10 +");
+	//System.out.println(a.StackCalc(" 10 10 10 + +" ));
     
     }
 }

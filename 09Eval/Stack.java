@@ -1,6 +1,6 @@
 import java.util.LinkedList;
 
-public class Stack <Double> 
+public class Stack  
 {    
     LinkedList<Double> data;
 	public Stack ()
@@ -14,12 +14,12 @@ public class Stack <Double>
 	data.add(thing);
 	
     }
-    public double pop ()
+    public Double pop ()
     {
 	return data.removeLast();
     }
     
-    public double peek() 
+    public Double peek() 
     {
 	return data.get(data.size()- 1);
     }
