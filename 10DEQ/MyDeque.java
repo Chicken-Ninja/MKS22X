@@ -1,3 +1,5 @@
+import java.util.*;
+
 public class MyDeque<E> {
 
     private E[] data;
@@ -40,7 +42,7 @@ public class MyDeque<E> {
     public void addFirst(E thing)
     {
 
-	if(thing == null)() ==
+	if(thing == null)
 	    {
 		throw new IllegalArgumentException();
 	    }
@@ -71,22 +73,104 @@ public class MyDeque<E> {
 	else if(last == length && isFull() == false)
 	    {
 		data[0] = thing;
+		last = 0; 
+	    }
+	else if(isFull() == false) 
+	    {
+		data[last + 1] = thing;
+		last = last + 1; 
+	    }
+    }
+
+    public E removeFirst()
+    {
+	E temp = data[0];
+	if(isEmpty() == true)
+	    {
+		throw new NoSuchElementException();
+	    }
+	else if(first == length)
+	    {
+		temp = data[first];
+		data[first] = null;
+		first = 0; 
+	    }
+	return temp;
+    }
+
+    public E removeLast() 
+    {
+	E temp = data[0];
+	if(isEmpty() == true)
+	    {
+		throw new NoSuchElementException();
+	    }
+	else if(last == 0) 
+	    {
+		temp = data[last];
+		data[last] = null;
+		last = length; 
+	    }
+	return temp;
+    }
+	
+    public E getFirst()
+    {
+	if(isEmpty()) 
+	    {
+		throw new NoSuchElementException();
+	    }
+	else
+	    {
+		return data[first];
+	    }
+    }
+    
+    public E getLast()
+    {
+	if(isEmpty())
+	    {
+		throw new NoSuchElementException();
+	    }
+	else
+	    {
+		return data[last];
+	    }
+    }
+	     
+
+
+
+
+
+
+	
 		
 
 		
 	
 		
-
+    public boolean isEmpty() 
+    {
+	for(int counter = 0; counter <= length; counter++ ) 
+	    {
+		if(data[counter] != null) 
+		    {
+			return false;
+		    }
+	    }
+	return true; 
+    }
 
 
     
-
+	
 
     public boolean isFull()
     {
 	for (int counter = 0; counter <= length; counter++ )
 	    {
-		if(data[counter] != null)
+		if(data[counter] == null)
 		    {
 			return false;
 		    }
