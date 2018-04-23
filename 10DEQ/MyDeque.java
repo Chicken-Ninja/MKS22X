@@ -17,9 +17,9 @@ public class MyDeque<E> {
 	    }
 	
 	data = (E[])new Object[capacity];
-	length = capacity;
+	length = capacity - 1;
 	first = 0;
-	last = capacity;
+	last = capacity - 1;
 	
     }
     
@@ -95,6 +95,12 @@ public class MyDeque<E> {
 		data[first] = null;
 		first = 0; 
 	    }
+	else
+	    {
+		temp = data[first];
+		data[first] = null;
+		first = first + 1; 
+	    }
 	return temp;
     }
 
@@ -110,6 +116,12 @@ public class MyDeque<E> {
 		temp = data[last];
 		data[last] = null;
 		last = length; 
+	    }
+	else
+	    {
+		temp = data[last];
+		data[last] = null;
+		last = last - 1;
 	    }
 	return temp;
     }
@@ -143,16 +155,70 @@ public class MyDeque<E> {
 
 
 
+    /*  public void resize() 
+    {
+	int E[] temp = new int E[length * 2];
+	if(first > last) 
+	    {
+		int size = length; 
+		int tempValues = 0; 
+		int dataValues = first; 
+		while(stepper <= length)
+		    {
+			if(stepper == length) 
+			    {
+				temp[counter] = data[stepper];
+				stepper = 0; 
+			    }
+			
 
+
+
+
+
+
+
+
+	first = 0; 
+	last = wimbledon;
 	
 		
+		
+    */	    
+	
+	
+		
+
+
+
+
+    public String toString() 
+    {
+	String dump = "[";
+	for(int counter = 0; counter < data.length; counter ++) 
+	    {
+		if(data[counter] == null) 
+		    {
+			dump = dump + "_";
+		    }
+		else
+		    {
+			dump = dump + data[counter];
+		    }
+		dump = dump + " ";
+	    }
+	
+	dump = dump + "]";
+	return dump;
+    }
+	
 
 		
 	
 		
     public boolean isEmpty() 
     {
-	for(int counter = 0; counter <= length; counter++ ) 
+	for(int counter = 0; counter < length; counter++ ) 
 	    {
 		if(data[counter] != null) 
 		    {
@@ -168,7 +234,7 @@ public class MyDeque<E> {
 
     public boolean isFull()
     {
-	for (int counter = 0; counter <= length; counter++ )
+	for (int counter = 0; counter < length; counter++ )
 	    {
 		if(data[counter] == null)
 		    {
@@ -176,6 +242,26 @@ public class MyDeque<E> {
 		    }
 	    }
 	return true;
+    }
+
+
+
+
+
+
+    public static void main(String[] args)
+    {
+	MyDeque a = new MyDeque(11);
+	a.addFirst(3);
+	System.out.println(a.toString());
+	a.addLast(4);
+	System.out.println(a.toString ());
+	a.addFirst(6);
+	System.out.println(a.toString());
+	a.removeFirst();
+	System.out.println(a.first);
+	System.out.println(a.toString());
+	
     }
 }
 		   
