@@ -46,12 +46,14 @@ public class MyDeque<E> {
 	    {
 		throw new IllegalArgumentException();
 	    }
+	if(isFull() == true)
+	    {
+		System.out.println("HELP");
+		resize();
+	    }
+	   
 	
-
-	
-	       
-	
-        else if(first == 0 && isFull() == false)
+        if(first == 0 && isFull() == false)
 	    {
 		data[length] = thing;
 		first = length; 
@@ -70,7 +72,12 @@ public class MyDeque<E> {
 	    {
 		throw new IllegalArgumentException();
 	    }
-	else if(last == length && isFull() == false)
+	if(isFull() == true)
+	    {
+		resize();
+	    }
+	
+	if(last == length && isFull() == false)
 	    {
 		data[0] = thing;
 		last = 0; 
@@ -150,26 +157,71 @@ public class MyDeque<E> {
 	    }
     }
 	     
-
-
-
-
-
-    /*  public void resize() 
+    public int numberOfElements() 
     {
-	int E[] temp = new int E[length * 2];
+	int dump = 0;
+	for(int counter = 0; counter < length; counter ++ ) 
+	    {
+		if( data[counter] != null) 
+		    {
+			dump++;
+		    }
+	    }
+	return dump; 
+    }
+
+
+
+    @SuppressWarnings("unchecked")
+    public void resize() 
+    {
+	E[] temp = (E[])new Object[length * 2];
+	int size = 0;
 	if(first > last) 
 	    {
-		int size = length; 
-		int tempValues = 0; 
-		int dataValues = first; 
-		while(stepper <= length)
+		//int size = length; 
+		int tempCounter = 0; 
+		int dataCounter = first; 
+		//int totalCounter = 0;
+		int elements = numberOfElements();
+		while(tempCounter <= elements)
 		    {
-			if(stepper == length) 
+			if(dataCounter == length) 
 			    {
-				temp[counter] = data[stepper];
-				stepper = 0; 
+				temp[tempCounter] = data[dataCounter];
+				dataCounter = 0;
+				tempCounter++;
 			    }
+			else
+			    {
+				temp[tempCounter] = data[dataCounter];
+				dataCounter ++;
+				tempCounter++;
+			    }
+		    }
+		size = tempCounter; 
+	    }
+	else
+	    {
+		int tempCounter = 0;
+		int dataCounter = first; 
+		for(int counter = 0 ; counter <= last; counter ++)
+		    {
+			temp[tempCounter] = data[dataCounter];
+			tempCounter++;
+			dataCounter++;
+		    }
+		size = tempCounter;
+	    }
+	data = temp;
+	first = 0; 
+	last = size;
+	length = length * 2;
+	
+    }
+								
+		    
+		
 			
 
 
@@ -179,12 +231,11 @@ public class MyDeque<E> {
 
 
 
-	first = 0; 
-	last = wimbledon;
+
 	
 		
 		
-    */	    
+        
 	
 	
 		
@@ -251,17 +302,30 @@ public class MyDeque<E> {
 
     public static void main(String[] args)
     {
-	MyDeque a = new MyDeque(11);
+	MyDeque a = new MyDeque(5);
 	a.addFirst(3);
 	System.out.println(a.toString());
-	a.addLast(4);
+	a.addFirst(4);
 	System.out.println(a.toString ());
+	a.addFirst(5);
+	System.out.println(a.toString());
+	//a.removeFirst();
+	//System.out.println(a.first);
+	//System.out.println(a.toString());
+	//a.resize();
+	//System.out.println(a.toString());
 	a.addFirst(6);
 	System.out.println(a.toString());
-	a.removeFirst();
-	System.out.println(a.first);
+	a.addFirst(7);
 	System.out.println(a.toString());
-	
+	a.addFirst(8);
+	System.out.println(a.toString());
+	//a.addFirst(9);
+	//System.out.println(a.toString());
+	//	a.resize();
+	//System.out.println(a.toString());
+	    
+	       
     }
 }
 		   
