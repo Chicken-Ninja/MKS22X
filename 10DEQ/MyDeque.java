@@ -34,6 +34,11 @@ public class MyDeque<E> {
 	
     }
 
+    public void checkresize()
+    {
+	resize();
+    }
+
     public int size()
     {
 	return length;
@@ -49,7 +54,7 @@ public class MyDeque<E> {
 	if(isFull() == true)
 	    {
 		System.out.println("HELP");
-		resize();
+		checkresize();
 	    }
 	   
 	
@@ -74,7 +79,7 @@ public class MyDeque<E> {
 	    }
 	if(isFull() == true)
 	    {
-		resize();
+		checkresize();
 	    }
 	
 	if(last == length && isFull() == false)
@@ -324,7 +329,9 @@ public class MyDeque<E> {
 	//System.out.println(a.toString());
 	//	a.resize();
 	//System.out.println(a.toString());
-	    
+	//a.checkresize();
+	//System.out.println(a.toString());
+    
 	       
     }
 }
