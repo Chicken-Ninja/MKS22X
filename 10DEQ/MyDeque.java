@@ -50,12 +50,13 @@ public class MyDeque<E> {
 	    {
 		System.out.println("HELP");
 		resize();
+		System.out.println(this);
 	    }
 	   
 	
         if(first == 0 && isFull() == false)
 	    {
-		data[length] = thing;
+		data[length - 1] = thing;
 		first = length; 
 	    }
 	else if(isFull() == false)
@@ -215,7 +216,7 @@ public class MyDeque<E> {
 	    }
 	data = temp;
 	first = 0; 
-	last = size;
+	last = size - 1;
 	length = length * 2;
 	
     }
@@ -260,6 +261,9 @@ public class MyDeque<E> {
 	    }
 	
 	dump = dump + "]";
+	System.out.println(first);
+	System.out.println(last);
+	   
 	return dump;
     }
 	
@@ -319,6 +323,8 @@ public class MyDeque<E> {
 	a.addFirst(7);
 	System.out.println(a.toString());
 	a.addFirst(8);
+	//a.resize();
+	//y	a.addFirst(8);
 	System.out.println(a.toString());
 	//a.addFirst(9);
 	//System.out.println(a.toString());
