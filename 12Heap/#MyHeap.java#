@@ -33,15 +33,16 @@ public class MyHeap
 
     public String toString()
     {
-	String dump = "";
+	String dump = "[";
 	
 	for( int counter = 0; counter < size; counter++)
 	    {
+		if
 		dump = dump + data[counter];
 		dump = dump + "_";
 	    }
 
-	return dump;
+	return dump + "]";
     }
 		
 
@@ -79,12 +80,12 @@ public class MyHeap
 	    }
     }
 
-    public void pushDown(int index)
+    public void pushMin(int index)
     {
 	if(data[(index - 1) /2].compareTo(data[index]) == 1)
 	    {
 		swap((index - 1) / 2 , index);
-		pushDown((index - 1) / 2);
+		pushMin((index - 1) / 2);
 	    }
     }
 
@@ -146,12 +147,18 @@ public class MyHeap
 				       break;
 				   }
 			    }
-			pushDown(placeholder);
+			pushMin(placeholder);
 		    }
 		size++;
 	    }
 		    
     }
+
+    public void remove()
+    {
+	
+	
+	
 
 
 			
