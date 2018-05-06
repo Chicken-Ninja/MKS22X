@@ -54,13 +54,18 @@ public class MyDeque<E> {
 	if(isFull() == true)
 	    {
 		System.out.println("HELP");
+<<<<<<< HEAD
 		checkresize();
+=======
+		resize();
+		System.out.println(this);
+>>>>>>> 49cda5df14bcaf875de4182db460c9f0defac2d9
 	    }
 	   
 	
         if(first == 0 && isFull() == false)
 	    {
-		data[length] = thing;
+		data[length - 1] = thing;
 		first = length; 
 	    }
 	else if(isFull() == false)
@@ -220,7 +225,7 @@ public class MyDeque<E> {
 	    }
 	data = temp;
 	first = 0; 
-	last = size;
+	last = size - 1;
 	length = length * 2;
 	
     }
@@ -265,6 +270,9 @@ public class MyDeque<E> {
 	    }
 	
 	dump = dump + "]";
+	System.out.println(first);
+	System.out.println(last);
+	   
 	return dump;
     }
 	
@@ -324,6 +332,8 @@ public class MyDeque<E> {
 	a.addFirst(7);
 	System.out.println(a.toString());
 	a.addFirst(8);
+	//a.resize();
+	//y	a.addFirst(8);
 	System.out.println(a.toString());
 	//a.addFirst(9);
 	//System.out.println(a.toString());
