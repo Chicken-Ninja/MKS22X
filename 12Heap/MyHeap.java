@@ -3,7 +3,7 @@ public class MyHeap
     String[] data;
     boolean IsMax;
     int length;
-    int size; 
+    int size = 0;
 
     public MyHeap()
     {
@@ -35,12 +35,12 @@ public class MyHeap
     {
 	String dump = "";
 	
-	for( int counter = 0; counter < size; counter++)
+	for( int counter = 0; counter < data.length; counter++)
 	    {
 		dump = dump + data[counter];
 		dump = dump + "_";
+		
 	    }
-
 	return dump;
     }
 		
@@ -79,22 +79,57 @@ public class MyHeap
 	    }
     }
 
-    public void pushDown(int index)
+    public void pushMin(int index)
     {
 	if(data[(index - 1) /2].compareTo(data[index]) == 1)
 	    {
 		swap((index - 1) / 2 , index);
-		pushDown((index - 1) / 2);
+		pushMin((index - 1) / 2);
 	    }
     }
 
-		    
+    public void pushDownMax(int index)
+    {
+	if(data[index * 2].compareTo(data[index]) == 1 || data[(index * 2) + 1].compareTo(data[index]) == 1)
+	    {
+		if(data[index * 2].compareTo(data[(index * 2) + 1]) == 1)
+		    {
+			swap(index , index * 2);
+			pushDownMax(index * 2);
+		    }
+		else
+		    {
+			swap(index , (index * 2) + 1);
+			pushDownMax((index * 2) + 1) ;
+		    }
+	    }
+    }
+			   
+    public void pushDownMin(int index)
+    {
+	if(data[index * 2].compareTo(data[index]) < 0 || data[(index * 2) + 1].compareTo(data[index]) < 0)
+		    {
+		if(data[index * 2].compareTo(data[(index * 2) + 1]) < 0)
+		    {
+			swap(index , index * 2);
+			pushDownMax(index * 2);
+		    }
+		else
+		    {
+			swap(index , (index * 2) + 1);
+			pushDownMax((index * 2) + 1) ;
+		    }
+	    }
+    }
+    
+    
 	   
 	       
 
 
     public void add(String thing)
     {
+	System.out.println(size);
 	if(IsMax == true)
 	    {
 		if(size == length)
@@ -146,12 +181,47 @@ public class MyHeap
 				       break;
 				   }
 			    }
-			pushDown(placeholder);
+			pushMin(placeholder);
 		    }
 		size++;
 	    }
+	System.out.println(size);
 		    
     }
+
+    public void remove()
+    {
+	if(IsMax == true)
+	    {
+		if(size == 0)
+		    {
+			throw new ArrayIndexOutOfBoundsException();
+		    }
+		else
+		    {
+			swap(size , 0);
+			pushDownMax(0);
+			size--;
+		    }
+	    }
+	else
+	    {
+		if(size == 0)
+		    {
+			throw new ArrayIndexOutOfBoundsException();
+		    }
+		else
+		    {
+			swap(size , 0);
+			pushDownMin(0);
+			size--;
+		    }
+	    }
+    }
+			
+			    
+		
+			  
 
 
 			
@@ -164,16 +234,22 @@ public class MyHeap
     public static void main(String[] args)
     {
 	MyHeap a = new MyHeap();
-	a.resize();
-	a.resize();
-	a.resize();
-	a.resize();
+	//a.resize();
+	//a.resize();
+	//a.resize();
+	//a.resize();
 	a.add("A");
 	a.add("B");
 	a.add("C");
 	a.add("D");
 	a.add("E");
 	a.add("F");
+	a.add("A");
+	
+	System.out.println(a.toString());
+	a.remove();
+	a.remove();
+	a.remove();
 	//a.resize();
 	//a.add("Hi");
 	System.out.println(a.toString());
