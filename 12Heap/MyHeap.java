@@ -35,14 +35,18 @@ public class MyHeap
     {
 	String dump = "";
 	
-	for( int counter = 0; counter < data.length; counter++)
+	for( int counter = 0; counter < size; counter++)
 	    {
 		dump = dump + data[counter];
 		dump = dump + "_";
 		
 	    }
+	System.out.println(size) ;
+
 	return dump;
     }
+
+    
 		
 
     public int size()
@@ -70,55 +74,81 @@ public class MyHeap
 	data[b] = c;
     }
 
-    public void pushUp(int index)
+    public boolean isFull() 
+    {
+	for(int counter =  0; counter < length; counter++ ) 
+	    {
+		if(data[counter] == null) 
+		    {
+			return false;
+		    }
+	    }
+	return true;
+    }
+
+
+    public void pushUpMax(int index)
     {
 	if(data[(index - 1) /2].compareTo(data[index]) < 0)
 	    {
 		swap((index - 1) / 2 , index);
-		pushUp((index - 1) / 2);
+		pushUpMax((index - 1) / 2);
 	    }
     }
 
-    public void pushMin(int index)
+    public void pushUpMin(int index)
     {
-	if(data[(index - 1) /2].compareTo(data[index]) == 1)
+	if(data[(index - 1) /2].compareTo(data[index]) > 0)
 	    {
 		swap((index - 1) / 2 , index);
-		pushMin((index - 1) / 2);
+		pushUpMin((index - 1) / 2);
 	    }
     }
 
     public void pushDownMax(int index)
     {
-	if(data[index * 2].compareTo(data[index]) == 1 || data[(index * 2) + 1].compareTo(data[index]) == 1)
+	//System.out.println(index * 2);
+	//System.out.println(size);
+	//System.out.println(index);
+	if((index * 2) + 2 <= size - 1) 
 	    {
-		if(data[index * 2].compareTo(data[(index * 2) + 1]) == 1)
+		//System.out.println("HI");
+		if(data[index * 2 + 1].compareTo(data[index]) > 0 || data[(index * 2) + 2].compareTo(data[index]) > 0)
 		    {
-			swap(index , index * 2);
-			pushDownMax(index * 2);
-		    }
-		else
-		    {
-			swap(index , (index * 2) + 1);
-			pushDownMax((index * 2) + 1) ;
+			//System.out.println("Test 2");
+			if(data[index * 2 + 1].compareTo(data[(index * 2) + 2]) > 0)
+			    {
+				//System.out.println("Test 3");
+				
+				swap(index , index * 2 + 1);
+				pushDownMax(index * 2 + 1);
+			    }
+			else
+			    {
+				//System.out.println("Test 4"); 
+				swap(index , (index * 2) + 2);
+				pushDownMax((index * 2) + 2) ;
+			    }
 		    }
 	    }
     }
-			   
     public void pushDownMin(int index)
     {
-	if(data[index * 2].compareTo(data[index]) < 0 || data[(index * 2) + 1].compareTo(data[index]) < 0)
-		    {
-		if(data[index * 2].compareTo(data[(index * 2) + 1]) < 0)
-		    {
-			swap(index , index * 2);
-			pushDownMax(index * 2);
-		    }
-		else
-		    {
-			swap(index , (index * 2) + 1);
-			pushDownMax((index * 2) + 1) ;
-		    }
+	if((index * 2) + 2 <= size - 1)
+	    {
+		if(data[index * 2 + 1].compareTo(data[index]) < 0 || data[(index * 2) + 2].compareTo(data[index]) < 0)
+		   {
+			if(data[index * 2 + 1].compareTo(data[(index * 2) + 2]) < 0)
+			    {
+				swap(index , index * 2 + 1);
+				pushDownMin(index * 2 + 1);
+			    }
+			else
+			    {
+				swap(index , (index * 2) + 2);
+				pushDownMin((index * 2) + 2) ;
+			    }
+		   }
 	    }
     }
     
@@ -129,21 +159,28 @@ public class MyHeap
 
     public void add(String thing)
     {
-	System.out.println(size);
+	//System.out.println(size);
+	
+
+
 	if(IsMax == true)
 	    {
-		if(size == length)
+		if(isFull())
 		    {
-			resize();
+			resize(); 
+			//System.out.println("PLS");
 		    }
-		
+
+
 		if(size == 0)
 		    {
 		        data[0] = thing;
-			size ++; 
+			
+			//System.out.println("HIYA");
 		    }
 		else 
 		    {
+			//System.out.println("HIYA 2");
 			int placeholder = 0; 
 			for(int counter = 0; counter < data.length; counter++ )
 			    {
@@ -154,42 +191,41 @@ public class MyHeap
 					break;
 				    }
 			    }
-			pushUp(placeholder);
+			pushUpMax(placeholder);
 		    }
 		size++;
 	    }
 	else
 	    {
-		if(size == length )
+		if(isFull())
 		    {
 			resize() ;
 		    }
 		if(size == 0)
 		    {
 			data[0] = thing;
-			size++;
+			
 		    }
 		else
 		    {
 			int placeholder = 0;
 			for(int counter = 0; counter < data.length; counter ++)
 			    {
-				if(data[counter] != null)
+				if(data[counter] == null)
 				   {
 				       placeholder = counter;
 				       data[counter] = thing;
 				       break;
 				   }
 			    }
-			pushMin(placeholder);
+			pushUpMin(placeholder);
 		    }
 		size++;
 	    }
-	System.out.println(size);
 		    
     }
 
-    public void remove()
+    public String remove()
     {
 	if(IsMax == true)
 	    {
@@ -199,9 +235,13 @@ public class MyHeap
 		    }
 		else
 		    {
-			swap(size , 0);
-			pushDownMax(0);
+			String temp = data[0];
+			swap(size - 1 , 0);
+			data[size - 1] = null; 
 			size--;
+			pushDownMax(0);
+			
+			return temp; 
 		    }
 	    }
 	else
@@ -212,14 +252,25 @@ public class MyHeap
 		    }
 		else
 		    {
-			swap(size , 0);
+			String temp = data[0];
+			swap(size - 1 , 0);
+			data[size - 1] = null; 
+			size --; 
 			pushDownMin(0);
-			size--;
+			
+			
+			return temp;
+			
 		    }
 	    }
     }
 			
-			    
+    public String peek()
+		       
+    {
+	return data[0];
+    }
+
 		
 			  
 
@@ -238,25 +289,58 @@ public class MyHeap
 	//a.resize();
 	//a.resize();
 	//a.resize();
-	a.add("A");
+	//System.out.println(a.size());
+	a.add("F");
+	//System.out.println("Test");
 	a.add("B");
+	//System.out.println("TEst2");
 	a.add("C");
 	a.add("D");
 	a.add("E");
 	a.add("F");
-	a.add("A");
+	//a.add("A");
 	
 	System.out.println(a.toString());
 	a.remove();
+	System.out.println(a.toString());
+	a.pushDownMax(0);
+	System.out.println(a.toString());
 	a.remove();
+	System.out.println(a.toString());
 	a.remove();
+	System.out.println(a.toString());
 	//a.resize();
 	//a.add("Hi");
-	System.out.println(a.toString());
+	//System.out.println(a.toString());
 	//a.resize();
 	//System.out.println(a.toString());
 
 	//RESIZE TESTING
+
+
+	System.out.println("MIN TESTING");
+	
+	MyHeap b = new MyHeap( false ); 
+	b.add("A");
+	b.add("C");
+	b.add("D");
+	b.add("Z");
+	b.add("B");
+	b.add("E");
+	b.add("F");
+	System.out.println(b.toString());
+	//b.add("Y");
+	//b.add("J");
+	//b.add("X");
+	b.remove();
+	System.out.println(b.toString());
+	b.remove();
+	System.out.println(b.toString());
+	b.remove();
+	System.out.println(b.toString());
+	b.remove();
+	System.out.println(b.toString());
+	    
 
 	
     }
