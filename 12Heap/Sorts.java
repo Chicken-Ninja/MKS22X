@@ -22,29 +22,7 @@ public class Sorts <T extends Comparable <T>>
     
     public static void HeapSort()
     {
-	int counter = 0;
-	int index1 = 0;
-	int index2 = 0;
-	while(size != data.size())
-	    {
-		if(index1 == 0 && index2 == 0)
-		    {
-			sorty[counter] = data[0];
-			counter++;
-			index1 = index1 * 2 + 1;
-			index2 = index2 * 2 + 1;
-			size++;
-
-		    }
-		else
-		    {
-			if(index1.compareTo(index2) > 1)
-			    {
-				sorty[counter] = data(index1);
-				counter++;
-				index1 = index1 * 2 + 1;
-				
-			
+	
 			
 	
 	
