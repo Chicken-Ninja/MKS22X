@@ -1,31 +1,32 @@
-public class MyHeap
+public class MyHeap<T extends Comparable<T>>
 {
-    String[] data;
+    private T[] data;
     boolean IsMax;
     int length;
     int size = 0;
 
+    @SuppressWarnings("Unchecked")
     public MyHeap()
     {
-	data = new String[1];
+	data = (T[])new Comparable[1];
 	IsMax = true;
 	length = 1; 
 
     }
 
-
+    @SuppressWarnings("Unchecked") 
     public MyHeap(boolean woot )
     {
 	if(woot == true)
 	    {
-		data = new String[1];
+		data = (T[]) new Comparable[1];
 		IsMax = true;
 		length  = 1; 
 
 	    }
 	else
 	    {
-		data = new String[1];
+		data = (T[]) new Comparable[1];
 		IsMax = false;
 		length = 1; 
 	    }
@@ -56,7 +57,7 @@ public class MyHeap
 
     public void resize()
     {
-	String[] temp = new String[length * 2];
+	T[] temp = (T[]) new Comparable[length * 2];
 	for(int counter = 0; counter < length; counter++)
 	    {
 		temp[counter] = data[counter];
@@ -69,7 +70,7 @@ public class MyHeap
 
     public void swap(int a, int b)
     {
-	String c = data[a];
+	T c = data[a];
 	data[a] = data[b];
 	data[b] = c;
     }
@@ -157,7 +158,7 @@ public class MyHeap
 	       
 
 
-    public void add(String thing)
+    public void add(T thing)
     {
 	//System.out.println(size);
 	
@@ -225,7 +226,7 @@ public class MyHeap
 		    
     }
 
-    public String remove()
+    public T remove()
     {
 	if(IsMax == true)
 	    {
@@ -235,7 +236,7 @@ public class MyHeap
 		    }
 		else
 		    {
-			String temp = data[0];
+			T temp = data[0];
 			swap(size - 1 , 0);
 			data[size - 1] = null; 
 			size--;
@@ -252,7 +253,7 @@ public class MyHeap
 		    }
 		else
 		    {
-			String temp = data[0];
+			T temp = data[0];
 			swap(size - 1 , 0);
 			data[size - 1] = null; 
 			size --; 
@@ -265,7 +266,7 @@ public class MyHeap
 	    }
     }
 			
-    public String peek()
+    public T peek()
 		       
     {
 	return data[0];
@@ -284,7 +285,7 @@ public class MyHeap
 
     public static void main(String[] args)
     {
-	MyHeap a = new MyHeap();
+	MyHeap a = new MyHeap<String>();
 	//a.resize();
 	//a.resize();
 	//a.resize();
@@ -320,7 +321,7 @@ public class MyHeap
 
 	System.out.println("MIN TESTING");
 	
-	MyHeap b = new MyHeap( false ); 
+	MyHeap b = new MyHeap<String>( false ); 
 	b.add("A");
 	b.add("C");
 	b.add("D");
@@ -328,6 +329,7 @@ public class MyHeap
 	b.add("B");
 	b.add("E");
 	b.add("F");
+	System.out.println("hey");
 	System.out.println(b.toString());
 	//b.add("Y");
 	//b.add("J");
