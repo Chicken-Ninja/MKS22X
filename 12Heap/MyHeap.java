@@ -1,6 +1,6 @@
 public class MyHeap<T extends Comparable<T>>
 {
-    private T[] data;
+    T[] data;
     boolean IsMax;
     int length;
     int size = 0;
