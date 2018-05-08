@@ -32,6 +32,22 @@ public class MyHeap<T extends Comparable<T>>
 	    }
     }
 
+    public void setSize( int a) 
+    {
+	size = a; 
+    }
+
+    public void Heapify(T[] a) 
+    {
+	data = a;
+	size = data.length; 
+	for(int counter = 0; counter < size; counter ++ )
+	    {
+		pushDownMax(counter);
+	    }
+    }
+	
+
     public String toString()
     {
 	String dump = "";
