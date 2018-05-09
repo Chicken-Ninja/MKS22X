@@ -17,6 +17,7 @@ public class Maze{
   */
   public Location[] getNeighbors(Location L){
       Location[] whoosh = new Location[4];
+      int counter = 0;
       
       
       
