@@ -16,7 +16,13 @@ public class Maze{
   YOU MUST COMPLETE THIS METHOD!!!
   */
   public Location[] getNeighbors(Location L){
-    return null;
+      Location[] whoosh = new Location[4];
+      
+      
+      
+      
+      
+      
   }
 
   public Location getStart(){
