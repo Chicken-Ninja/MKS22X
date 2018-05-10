@@ -18,12 +18,33 @@ public class Maze{
   public Location[] getNeighbors(Location L){
       Location[] whoosh = new Location[4];
       int counter = 0;
-      
-      
-      
-      
-      
-      
+      atY = L.getY();
+      atX = L.getX();
+
+      if(atY + 1 < maze[0].length && maze[atY + 1][atX] != "#")
+	  {
+	      Location a = new Location(atX, atY + 1);
+	      locations[counter] = a;
+	      counter++;
+	  }
+      if(AtX + 1 < maze.length && maze[atY][atX + 1] != "#")
+	  {
+	      Location a = new Location(atX + 1, atY);
+	      locations[counter] = a;
+	      counter++;
+	  }
+      if(atY - 1 > 0 && maze[atY -1][atX]!= "#")
+	  {
+	      Location a = new Location(atX , atY - 1);
+	      locations[counter] = a;
+	      counter++;
+	  }
+      if(atX - 1 > 0 && maze[atY][atX - 1]!= "#")
+	  {
+	      location a = new Location(atX - 1 , atY);
+	      locations[couner] = a;
+	      counter++;
+	  }
   }
 
   public Location getStart(){
@@ -81,7 +102,7 @@ public class Maze{
             endc=c;
           }else{
             System.out.println("Multiple 'E' found!");
-            System.exit(0);
+             System.exit(0);
           }
         }
       }
