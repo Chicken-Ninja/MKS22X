@@ -11,8 +11,8 @@ public class RunningMedian
 
     public RunningMedian()
     {
-	MyHeap<Double> min = new MyHeap<>(false);
-	MyHeap<Double> max = new MyHeap<>(true);
+	min = new MyHeap<>(false);
+        max = new MyHeap<>();
 	median = 0.0; 
     }
 
@@ -20,6 +20,17 @@ public class RunningMedian
     {
 	//	System.out.println(max.size());
 	//      System.out.println(min.size());
+	
+	if(value >= median) 
+	    {
+		min.add(value);
+	    }
+	
+	if(value < median) 
+	    {
+		max.add(value);
+	    }
+	      
 
 	if(max.size() - min.size() > 1)
 	    {
@@ -38,7 +49,7 @@ public class RunningMedian
 		    }
 	    }
     		
-	if(value >= median)
+	/*if(value >= median)
 	    {
 		min.add(value);
 	    }
@@ -46,20 +57,23 @@ public class RunningMedian
 	    {
 		max.add(value);
 	    }
-	
-	
+	*/
+	//System.out.println(max.size());
+	//System.out.println(min.size());
 	if(max.size() -  min.size() == 1 )
 	    {
 		median = max.peek();
 	    }
-	else if(max.size() - min.size() == 1)
+	else if(min.size() - max.size() == 1)
 	    {
 		median = min.peek() ;
 	    }
-	else
+	else if(max.size() == min.size())
 	    {
 		median = (max.peek() + min.peek()) / 2;
 	    }
+	//System.out.println(max.peek());
+	//System.out.println(min.peek());
     }
 
     public String toString()
@@ -95,7 +109,7 @@ public class RunningMedian
     {
 	RunningMedian a = new RunningMedian();
 	a.add(10.0);
-	System.out.println(a.toString());
+	//System.out.println(a.toString());
 	a.add(12.0);
 	System.out.println(a.getMedian()) ;
     }

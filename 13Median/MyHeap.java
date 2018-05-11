@@ -286,6 +286,7 @@ public class MyHeap<T extends Comparable<T>>
     public static void main(String[] args)
     {
 	MyHeap a = new MyHeap<String>();
+	System.out.println(a.size());
 	//a.resize();
 	//a.resize();
 	//a.resize();
