@@ -8,4 +8,14 @@ public class MazeSolver
 
     }
 
-    public 
+    public void solve()
+    {
+
+    }	
+
+    public void  solve(int) 
+    {
+    }
+    
+
+	
