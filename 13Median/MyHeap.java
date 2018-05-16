@@ -107,6 +107,7 @@ public class MyHeap<T extends Comparable<T>>
     }
 
     public void pushDownMax(int index)
+
     {
 	//System.out.println(index * 2);
 	//System.out.println(size);
@@ -300,6 +301,7 @@ public class MyHeap<T extends Comparable<T>>
 	a.add("D");
 	a.add("E");
 	a.add("F");
+	a.add("G");
 	//a.add("A");
 	
 	System.out.println(a.toString());
@@ -321,6 +323,13 @@ public class MyHeap<T extends Comparable<T>>
 
 
 	System.out.println("MIN TESTING");
+	MyHeap z = new MyHeap<Double>();
+	z.add(10.0);
+	a.add(12.0);
+	z.add(16.0);
+	System.out.println(z.toString());
+
+
 	
 	MyHeap b = new MyHeap<String>( false ); 
 	b.add("A");
