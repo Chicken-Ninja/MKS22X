@@ -1,6 +1,6 @@
 public class MyHeap<T extends Comparable<T>>
 {
-    private T[] data;
+    T[] data;
     boolean IsMax;
     int length;
     int size = 0;
@@ -31,6 +31,22 @@ public class MyHeap<T extends Comparable<T>>
 		length = 1; 
 	    }
     }
+
+    public void setSize( int a) 
+    {
+	size = a; 
+    }
+
+    public void Heapify(T[] a) 
+    {
+	data = a;
+	size = data.length; 
+	for(int counter = 0; counter < size; counter ++ )
+	    {
+		pushDownMax(counter);
+	    }
+    }
+	
 
     public String toString()
     {
@@ -90,6 +106,7 @@ public class MyHeap<T extends Comparable<T>>
 
     public void pushUpMax(int index)
     {
+	//If if the position above it is smaller than it, move it up. Recursive. MAX
 	if(data[(index - 1) /2].compareTo(data[index]) < 0)
 	    {
 		swap((index - 1) / 2 , index);
@@ -99,6 +116,7 @@ public class MyHeap<T extends Comparable<T>>
 
     public void pushUpMin(int index)
     {
+	//If the position above it is bigger than it is, move it up. Recursive. MIN
 	if(data[(index - 1) /2].compareTo(data[index]) > 0)
 	    {
 		swap((index - 1) / 2 , index);
@@ -107,27 +125,25 @@ public class MyHeap<T extends Comparable<T>>
     }
 
     public void pushDownMax(int index)
-
     {
-	//System.out.println(index * 2);
-	//System.out.println(size);
-	//System.out.println(index);
+	//If the number in index is bigger than the one underneath it, move it down, and recursive shit.Maximum
+	
 	if((index * 2) + 2 <= size - 1) 
 	    {
-		//System.out.println("HI");
+		
 		if(data[index * 2 + 1].compareTo(data[index]) > 0 || data[(index * 2) + 2].compareTo(data[index]) > 0)
 		    {
-			//System.out.println("Test 2");
+		
 			if(data[index * 2 + 1].compareTo(data[(index * 2) + 2]) > 0)
 			    {
-				//System.out.println("Test 3");
+			
 				
 				swap(index , index * 2 + 1);
 				pushDownMax(index * 2 + 1);
 			    }
 			else
 			    {
-				//System.out.println("Test 4"); 
+				
 				swap(index , (index * 2) + 2);
 				pushDownMax((index * 2) + 2) ;
 			    }
@@ -136,6 +152,9 @@ public class MyHeap<T extends Comparable<T>>
     }
     public void pushDownMin(int index)
     {
+	
+	//IF the number in index is bigger than the ones underneath it, move this number down, and recursive it down. Minimum 
+
 	if((index * 2) + 2 <= size - 1)
 	    {
 		if(data[index * 2 + 1].compareTo(data[index]) < 0 || data[(index * 2) + 2].compareTo(data[index]) < 0)
@@ -284,76 +303,40 @@ public class MyHeap<T extends Comparable<T>>
 			
 			
 
-    public static void main(String[] args)
+     public static void main(String[] args)
     {
-	MyHeap a = new MyHeap<String>();
-	System.out.println(a.size());
-	//a.resize();
-	//a.resize();
-	//a.resize();
-	//a.resize();
-	//System.out.println(a.size());
-	a.add("F");
-	//System.out.println("Test");
-	a.add("B");
-	//System.out.println("TEst2");
-	a.add("C");
-	a.add("D");
-	a.add("E");
-	a.add("F");
-	a.add("G");
-	//a.add("A");
-	
-	System.out.println(a.toString());
-	a.remove();
-	System.out.println(a.toString());
-	a.pushDownMax(0);
-	System.out.println(a.toString());
-	a.remove();
-	System.out.println(a.toString());
-	a.remove();
-	System.out.println(a.toString());
-	//a.resize();
-	//a.add("Hi");
-	//System.out.println(a.toString());
-	//a.resize();
-	//System.out.println(a.toString());
-
-	//RESIZE TESTING
-
-
-	System.out.println("MIN TESTING");
-	MyHeap z = new MyHeap<Double>();
-	z.add(10.0);
-	a.add(12.0);
+	MyHeap z = new MyHeap<Double>(false);
+	MyHeap x = new MyHeap<Double>();
+	z.add(12.0);
+	z.add(14.0);
 	z.add(16.0);
+	z.add(18.0);
 	System.out.println(z.toString());
-
-
+	z.remove(); 
+	System.out.println(z.toString());
+	z.remove();
 	
-	MyHeap b = new MyHeap<String>( false ); 
-	b.add("A");
-	b.add("C");
-	b.add("D");
-	b.add("Z");
-	b.add("B");
-	b.add("E");
-	b.add("F");
-	System.out.println("hey");
-	System.out.println(b.toString());
-	//b.add("Y");
-	//b.add("J");
-	//b.add("X");
-	b.remove();
-	System.out.println(b.toString());
-	b.remove();
-	System.out.println(b.toString());
-	b.remove();
-	System.out.println(b.toString());
-	b.remove();
-	System.out.println(b.toString());
-	    
+	System.out.println(z.toString());
+	x.add(10.0);
+	x.add(12.0);
+	x.add(16.0);
+	x.add(22.0);
+	x.add(11.0);
+	x.add(40.0);
+	//	System.out.println(x.toString());
+	z.add(x.remove());
+	//System.out.println(x.toString());
+	
 
+	//z.add(16.0);
+	//	System.out.println(z.toString());
+
+	//	System.out.println(z.toString());
+	//x.add(z.remove());
+	//System.out.println(z.toString());
+	//System.out.println(x.toString());
+	//System.out.println(z.toString());
+	
 	
     }
 }

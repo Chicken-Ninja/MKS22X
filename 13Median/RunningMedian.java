@@ -8,6 +8,7 @@ public class RunningMedian
     MyHeap<Double> min;
     MyHeap<Double> max;
     double median;
+    int size = 0; 
 
     public RunningMedian()
     {
@@ -18,103 +19,57 @@ public class RunningMedian
 
     public void add(Double value)
     {
-
-	if(max.size() - min.size() > 1)
-	    {
-		for(int counter = 0; counter < max.size() - min.size(); counter++ )
-		    {
-			double temp = max.remove() ;
-			System.out.println(temp);
-			min.add(temp) ;
-		    }
-	    }
-	if(min.size() - max.size() > 1)
-	    {
-		for(int counter = 0; counter < min.size() - max.size(); counter++ )
-		    {
-			double temp = min.remove() ;
-			System.out.println(temp);
-			max.add(temp);
-		    }
-	    }
-			
-
-
-
-	
-	if(value >= median) 
-	    {
-		min.add(value);
-	    }
-	
-	else if(value < median) 
+	if(size == 0 )
 	    {
 		max.add(value);
 	    }
-
-	
-
-
-
-
-
-
-
-	
-
-	/*	if(max.size() - min.size() > 1)
+	else 
 	    {
-		//System.out.println(max.size() - min.size());
-		for(int counter = max.size() - min.size(); counter >= 0; counter-- )
+
+		if(value >= getMedian()) 
 		    {
-			Double temp = max.remove() ;
-			
-			min.add(temp);
+			min.add(value);
 		    }
-	    }
-	else if(min.size() - max.size() > 1)
-	    {
-		//System.out.println(min.size() - max.size());
-		for(int counter = max.size() - min.size(); counter >= 0; counter-- )
-		    {
-			Double temp = min.remove();
-			System.out.println(temp);
-			max.add(temp);
-		    }
-		//System.out.println(max.toString());
-		//System.out.println(min.toString());
-	    }
-	    /*	
-	/*if(value >= median)
-	    {
-		min.add(value);
-	    }
-	if(value < median)
-	    {
-		max.add(value);
-	    }
-	*/
-	//System.out.println(max.size());
-	//System.out.println(min.size());
-	if(max.size() -  min.size() == 1 )
-	    {
-		median = max.peek();
-	    }
-	if(min.size() - max.size() == 1)
-	    {
-		//System.out.println("HELLO");
-		//System.out.println(min.peek());
 		
-		median = min.peek() ;
+		else if(value < getMedian()) 
+		    {
+			max.add(value);
+		    }
 	    }
-	else if(max.size() == min.size())
+	if(max.size() - min.size() > 1) 
 	    {
-		median = (max.peek() + min.peek()) / 2 ;
+		min.add(max.remove());
 	    }
-	System.out.println(max.toString() + " WHOOOO " + min.toString());
-        
+	else if(min.size() - max.size() > 1) 
+	    {
+		max.add(min.remove());
+	    }
+	size++ ;
     }
 
+    public Double getMedian() 
+    {
+	if(size == 0 )
+	    {
+		throw new NoSuchElementException() ; 
+	    }
+	if(max.size() - min.size() == 1 )
+	    {
+		return max.peek(); 
+	    }
+	else if(min.size () - max.size () == 1)
+	    {
+		return min.peek ();
+	    }
+	else if(min.size() == max.size() )
+	    {
+		return (min.peek() + max.peek()) / 2.0;
+	    }
+    return 0.123344556;
+    }
+
+	
+	
     public String toString()
     {
 	String dump = "";
@@ -125,25 +80,12 @@ public class RunningMedian
 	
     }
 
-    
     public int size()
     {
-	return max.size() + min.size();
+	return size;
     }
-    
 
 
-    
-
-    public Double getMedian()
-    {
-	if(max.size() + min.size() == 0)
-	    {
-		throw new NoSuchElementException();
-	    }
-	
-	return median;
-    }
 
     public static void main(String[] args)
     {
