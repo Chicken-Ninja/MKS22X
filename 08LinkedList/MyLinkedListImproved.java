@@ -382,9 +382,9 @@ public class MyLinkedListImproved <T extends Comparable<T>> implements Iterable<
 	return thing.length();
     }
 
-    public MyLinkedListImproved<String>[] sort(MyLinkedListImproved<String> 
+ 
 	
-	
+    /*	
 	
     public static void radixsort(MyLinkedListImproved<Integer> data) 
     {
@@ -409,7 +409,7 @@ public class MyLinkedListImproved <T extends Comparable<T>> implements Iterable<
 	
 	
     }
-
+    */
 	
 		    
 	
