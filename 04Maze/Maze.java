@@ -6,7 +6,7 @@ public class Maze{
     private char[][]maze;
     private boolean animate;//false by default
     //private ArrayList  <String> AMAZEING = new ArrayList <String> ();
-    private String AMAZEING; 
+    
 
     /*Constructor loads a maze text file, and sets animate to false by default.
 
@@ -20,43 +20,76 @@ public class Maze{
 
       3. When the file is not found OR the file is invalid (not exactly 1 E and 1 S) then: print a meaningful error and exit the program.
     */
-    public Maze(String fileName){
+    public Maze(String filename){
 	
 	animate = false; 
-	try{File a  = new File(fileName);
-	    Scanner b = new Scanner(a);
+	
+	try {
+	    File file = new File(filename);
+	    Scanner b = new Scanner(file);
+	    String values = b.nextLine();
+	    int a = values.length();
 	    
-	    while(b.hasNext()){
-		String line = b.nextLine();
-		int rowCount = 0;
-		int colCount = 0;
-	        for(int counter = 0; counter <= line.length(); counter++ )
-		    {
-			if(counter == line.length()) {
-			    maze[rowCount][colCount + 1] = line.charAt(counter); 
-			    rowCount+=1;
-			    colCount = 0;
+	    while(b.hasNextLine())
+		{
+		    values = values + b.nextLine();
+		}
+	    
+	    maze = new char[values.length() / a][a];
+	    
+	    for(int counter = 0; counter < values.length(); counter++)
+		{
+		    maze[counter/a][counter%a] = values.charAt(counter);
+		}
+	    
+	    int SCount = 0;
+	    int ECount = 0;
+	    
+	    for(int counter = 0 ; counter < maze.length; counter++ ) 
+		{
+		    for(int stepper = 0; stepper < maze.length; stepper++ )
+			{
+			    if(maze[stepper][counter] == 'C')
+				{
+				    SCount ++;
+				}
+			    if(maze[stepper][counter] == 'E')
+				{
+				    ECount ++;
+				}
 			}
-			else{maze[rowCount][colCount + 1] = line.charAt(counter);
-			    colCount += 1;
-			}
-	       
-		    }
+		}
+	    if(ECount != 1 && SCount != 1)
+		{
+		    throw new IllegalStateException();
+		}
+	    if(ECount > 1 && SCount >1)
+		{
+		    throw new IllegalStateException();
+		}
+	    
+	}
+	catch(FileNotFoundException e)
+	    {
+		e.printStackTrace();
 	    }
-	
-	}catch(FileNotFoundException e){
-		System.out.println("File not found" + fileName);
-		System.exit(1);}
-    //System.out.println(AMAZEING);
-    for(int counter = 0; counter < maze.length - 1; counter++) {
-	for(int stepper = 0; stepper < maze.length - 1; stepper++ ) {
-	    AMAZEING = AMAZEING + maze[counter][stepper];
-	}}
-    System.out.println(AMAZEING);
-	
     }
-    
-	
+		
+    public String toString()
+    {
+	String dump = "";
+	for(int counter = 0; counter < maze.length; counter++ )
+	    {
+		for(int stepper = 0; stepper < maze[0].length; stepper++)
+		    {
+			dump += maze[counter][stepper];
+			dump += " ";
+		    }
+		dump += "\n";
+	    }
+	return dump;
+    }
+		    
 
 
 		
@@ -120,6 +153,17 @@ public class Maze{
 
         //COMPLETE SOLVE
         return -1; //so it compiles
+    
+
+
+    }
+
+
+    public static void main (String[] args) 
+    {
+	Maze a = new Maze("TestMaze1.txt");
+	System.out.println(a.toString());
+
     }
 }
 
