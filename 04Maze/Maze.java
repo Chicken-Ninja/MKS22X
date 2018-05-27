@@ -119,14 +119,85 @@ public class Maze{
       Note the helper function has the same name, but different parameters.
       Since the constructor exits when the file is not found or is missing an E or S, we can assume it exists.
     */
-    public int solve(){ return 0;
+    public int solve(){ 
+	int SCol = 0;
+	int SRow = 0;
+	System.out.println("Yo");
+	for( int counter =  0; counter < maze.length; counter++ ) 
+	    {
+		for(int stepper = 0; stepper < maze[0].length; stepper++)
+		    {
+			if(maze[counter][stepper] == 'S')
+			    {
+				SCol = stepper;
+				SRow = counter;
+			    }
+		    }
+	    }
+	System.out.println("Hey");
+	return solveH(SCol , SRow);
+	
+    }
+    public int solveH(int col , int row) 
+    {
+	int count = 0;
+	
+	System.out.println(toString());
+	
+	if(maze[row][col] == 'E')
+	    {
+		return count; 
+	    }
+	else{
+	    maze[row][col] = '@';
+	    count++;
+	    }
+	if( row + 1 <= maze.length)
+	    {
+		if(maze[row + 1][col] == ' ')
+		    {
+			count += solveH(col , row + 1) ;
+		    }
+	    }
+	if( row - 1 >= 0)
+	    {
+		if(maze[row - 1][col] ==' ')
+		    {
+		        count += solveH(col, row - 1);
+		   }
+	    }
+	if(col + 1 <= maze[0].length)
+	    {
+		if(maze[row][col+1] == ' ')
+		    {
+		        count +=  solveH(col + 1, row);
+		    }
+	    }
+	if(col - 1 >= 0)
+	    {
+		if(maze[row] [col -1] == ' ')
+		    {
+			 count += solveH(col - 1, row);
+		    }
+	    }
+	count --;
+	System.out.println(toString());
+	maze[row][col] = ' ';
+	return count;
+    }
+	
+    
+	   
+		
+	
+			
             //find the location of the S. 
 
             //erase the S
 
             //and start solving at the location of the s.
             //return solve(???,???);
-    }
+
 
     /*
       Recursive Solve function:
@@ -163,6 +234,7 @@ public class Maze{
     {
 	Maze a = new Maze("TestMaze1.txt");
 	System.out.println(a.toString());
+	System.out.println(a.solve());
 
     }
 }
