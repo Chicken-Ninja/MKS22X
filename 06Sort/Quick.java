@@ -6,7 +6,7 @@ public class Quick{
 
    
 
-    public static  String toString(int[] nums) {
+    public static String toString(int[] nums) {
 	String dump = ""; 
 	for(int counter = 0; counter < nums.length; counter++ )
 	    {dump = dump + nums[counter];
@@ -22,7 +22,7 @@ public class Quick{
 	nums[a] = placeholder;
     }
 
-    public static int partition(int[] nums, int start, int end) 
+      public static int Oldpartition(int[] nums, int start, int end) 
     { 
 	Random rand = new Random();
 	int i = start;
@@ -42,14 +42,50 @@ public class Quick{
 			swap(nums, i, gt);
 			gt --;
 		    }
-		else{
-		    swap(nums , i , lt);
-		    i++;
-		    lt++;
+		else if(nums[i] < check)
+		    {
+			swap(nums , i , lt);
+			i++;
+			lt++;
 		}
 	    }
-    
-	return gt;} 
+	return gt;
+	
+    }
+
+
+
+    public static int[] partition(int[] nums, int start, int end) 
+    { 
+	Random rand = new Random();
+	int i = start + 1;
+	int lt = start;
+	int gt = end; 
+	int pivot =  rand.nextInt(end-start+1) + start;
+	int check = nums[pivot];
+	//	System.out.println(nums[pivot]);
+	while(i <= gt) 
+	    {
+		//	System.out.println(toString(nums));
+		//System.out.println(i);
+		if(nums[i] == check) 
+		    {i++;}
+	        else if(nums[i] > check) 
+		    {
+			swap(nums, i, gt);
+			gt --;
+		    }
+		else if(nums[i] < check)
+		    {
+			swap(nums , i , lt);
+			i++;
+			lt++;
+		}
+	    }
+	int[] dump = {i , lt};
+	return dump;
+	
+    }
 
 
     public static int quickSelect(int nums[], int k) 
@@ -57,7 +93,7 @@ public class Quick{
 	int start = 0;
 	int end = nums.length - 1;
 	int v = 0; 
-	v = partition(nums , start, end); 
+	v =Oldpartition(nums , start, end); 
 	while(v != k) 
 	    { 
 		if(v < k ) 
@@ -69,7 +105,7 @@ public class Quick{
 			end = v; 
 		    }
 		
-		v= partition(nums, start , end);
+		v= Oldpartition(nums, start , end);
 	    }
 	return nums[v];
     }
@@ -81,15 +117,12 @@ public class Quick{
 
     public static void quickHelp(int[] nums, int start, int  end) 
     {
-	int v;
-	v = partition(nums , start , end) ;
-	if(start < end) 
-	    {
-		System.out.println(toString(nums));
-		quickHelp(nums, start , v);
-		quickHelp(nums, v , end);
-	    }
-       
+	if (start < end){
+	  
+	    int[]i = partition(nums, start, end);
+	    quickHelp(nums, start, i[0]);
+	    quickHelp(nums, i[1], end);
+	}
     }
 	
 	
