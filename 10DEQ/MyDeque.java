@@ -54,12 +54,12 @@ public class MyDeque<E> {
 	if(isFull() == true)
 	    {
 		System.out.println("HELP");
-<<<<<<< HEAD
+
 		checkresize();
-=======
+
 		resize();
 		System.out.println(this);
->>>>>>> 49cda5df14bcaf875de4182db460c9f0defac2d9
+
 	    }
 	   
 	
@@ -151,7 +151,7 @@ public class MyDeque<E> {
 	    }
 	else
 	    {
-		return data[first];
+		return data[first - 1];
 	    }
     }
     
@@ -163,7 +163,7 @@ public class MyDeque<E> {
 	    }
 	else
 	    {
-		return data[last];
+		return data[last - 1];
 	    }
     }
 	     
@@ -252,29 +252,18 @@ public class MyDeque<E> {
 
 
 
-
+    
     public String toString() 
     {
 	String dump = "[";
-	for(int counter = 0; counter < data.length; counter ++) 
+	for(int counter = 0; counter < data.length; counter ++ )
 	    {
-		if(data[counter] == null) 
-		    {
-			dump = dump + "_";
-		    }
-		else
-		    {
-			dump = dump + data[counter];
-		    }
-		dump = dump + " ";
-	    }
-	
-	dump = dump + "]";
-	System.out.println(first);
-	System.out.println(last);
-	   
-	return dump;
+		dump += data[counter] ;
+		dump += " ";
+	    }					
+	return dump + "]";
     }
+
 	
 
 		
@@ -332,6 +321,9 @@ public class MyDeque<E> {
 	a.addFirst(7);
 	System.out.println(a.toString());
 	a.addFirst(8);
+	System.out.println(a.toString());
+	System.out.println(a.getFirst());
+	System.out.println(a.getLast());
 	//a.resize();
 	//y	a.addFirst(8);
 	System.out.println(a.toString());
