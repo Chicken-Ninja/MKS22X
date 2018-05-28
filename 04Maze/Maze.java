@@ -4,6 +4,7 @@ import java.io.*;
 public class Maze{
 
     private char[][]maze;
+    private int[][] moveBank;
     private boolean animate;//false by default
     //private ArrayList  <String> AMAZEING = new ArrayList <String> ();
     
@@ -29,7 +30,15 @@ public class Maze{
 	    Scanner b = new Scanner(file);
 	    String values = b.nextLine();
 	    int a = values.length();
+	    int[][] moveBank = new int[2][4];
+	    int[] x = {-1 , 0 , 0 ,1};
+	    int[] y ={0, -1 , 1 , 0};
+	    moveBank[0] = x;
+	    moveBank[1] = y;
 	    
+	    
+			    
+
 	    while(b.hasNextLine())
 		{
 		    values = values + b.nextLine();
@@ -80,8 +89,10 @@ public class Maze{
 	String dump = "";
 	for(int counter = 0; counter < maze.length; counter++ )
 	    {
+		System.out.println("Woot");
 		for(int stepper = 0; stepper < maze[0].length; stepper++)
 		    {
+			System.out.println("Whoot");
 			dump += maze[counter][stepper];
 			dump += " ";
 		    }
@@ -134,61 +145,40 @@ public class Maze{
 			    }
 		    }
 	    }
+	maze[SRow][SCol] = ' ';
 	System.out.println("Hey");
-	return solveH(SCol , SRow);
+	return solveH(SCol , SRow, 0);
 	
     }
-    public int solveH(int col , int row) 
+    public int solveH(int col , int row , int count) 
     {
-	int count = 0;
-	
-	System.out.println(toString());
-	
 	if(maze[row][col] == 'E')
 	    {
 		return count; 
 	    }
-	else{
-	    maze[row][col] = '@';
-	    count++;
-	    }
-	if( row + 1 <= maze.length)
-	    {
-		if(maze[row + 1][col] == ' ')
-		    {
-			count += solveH(col , row + 1) ;
-		    }
-	    }
-	if( row - 1 >= 0)
-	    {
-		if(maze[row - 1][col] ==' ')
-		    {
-		        count += solveH(col, row - 1);
-		   }
-	    }
-	if(col + 1 <= maze[0].length)
-	    {
-		if(maze[row][col+1] == ' ')
-		    {
-		        count +=  solveH(col + 1, row);
-		    }
-	    }
-	if(col - 1 >= 0)
-	    {
-		if(maze[row] [col -1] == ' ')
-		    {
-			 count += solveH(col - 1, row);
-		    }
-	    }
-	count --;
-	System.out.println(toString());
-	maze[row][col] = ' ';
-	return count;
-    }
 	
-    
+	for(int counter = 0 ; counter < moveBank[0].length; counter++ ) 
+	    {
+		try {
+		    if(maze[row + moveBank[0][counter]][col + moveBank[1][counter]] == ' ' || maze[row + moveBank[0][counter]][col + moveBank[1][counter]] == 'E')
+			{
+			    maze[row][col] = '@';
+			    int temporary = solveH(col + moveBank[1][counter], row + moveBank[0][counter] , count + 1);
+			    
+			    if(temporary != -1)
+				{
+				    return temporary; 
+				}
+			    maze[row][col] = ' ';
+			}
+		}
+		catch(IndexOutOfBoundsException e)
+		    {}
+	    }
+	return -1;
+    }
 	   
-		
+    
 	
 			
             //find the location of the S. 
@@ -213,21 +203,17 @@ public class Maze{
             Note: This is not required based on the algorithm, it is just nice visually to see.
         All visited spots that are part of the solution are changed to '@'
     */
-    private int solve(int row, int col){ //you can add more parameters since this is private
+   //you can add more parameters since this is private
 
         //automatic animation! You are welcome.
-        if(animate){
-            clearTerminal();
-            System.out.println(this);
-            wait(20);
-        }
+       
 
         //COMPLETE SOLVE
-        return -1; //so it compiles
+       //so it compiles
     
 
 
-    }
+
 
 
     public static void main (String[] args) 
@@ -235,6 +221,7 @@ public class Maze{
 	Maze a = new Maze("TestMaze1.txt");
 	System.out.println(a.toString());
 	System.out.println(a.solve());
+	
 
     }
 }
