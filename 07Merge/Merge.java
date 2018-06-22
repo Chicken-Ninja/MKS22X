@@ -119,8 +119,8 @@ public class Merge{
 	    String b = "";
 	    for(int counter = 0; counter < a.length; counter++ )
 		{
-		    b += a[counter];
-		    b += " ";
+		    b += a[counter]; 
+		    b += " " ;
 		}
 	    System.out.println(b);
 	}
