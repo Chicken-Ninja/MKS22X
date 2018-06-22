@@ -68,6 +68,7 @@ public class Maze{
 				}
 			}
 		}
+	    
 	    if(ECount != 1 && SCount != 1)
 		{
 		    throw new IllegalStateException();
@@ -131,8 +132,7 @@ public class Maze{
       Since the constructor exits when the file is not found or is missing an E or S, we can assume it exists.
     */
     public int solve(){ 
-	int SCol = 0;
-	int SRow = 0;
+	
 	System.out.println("Yo");
 	for( int counter =  0; counter < maze.length; counter++ ) 
 	    {
@@ -145,6 +145,7 @@ public class Maze{
 			    }
 		    }
 	    }
+	System.out.println(SRow + " " + SCol);
 	maze[SRow][SCol] = ' ';
 	System.out.println("Hey");
 	return solveH(SCol , SRow, 0);

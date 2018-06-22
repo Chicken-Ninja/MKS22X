@@ -24,6 +24,8 @@ public class USACO {
 			 {
 				int[][] lake = new int[b.nextInt()][temp];
 			}
+			if(
+			   
 			
 					   	   
 				  

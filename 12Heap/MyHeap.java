@@ -359,7 +359,10 @@ public class MyHeap<T extends Comparable<T>>
 	b.remove();
 	System.out.println(b.toString());
 	    
-
+	MyHeap z = new MyHeap<Double>(false);
+	z.add(10.0);
+	System.out.println(z.toString());
+	
 	
     }
 }
