@@ -4,7 +4,8 @@ import java.io.*;
 public class Maze{
 
     private char[][]maze;
-    private int[][] moveBank;
+    private int[] moveX;
+    private int[] moveY;
     private boolean animate;//false by default
     //private ArrayList  <String> AMAZEING = new ArrayList <String> ();
     
@@ -30,11 +31,11 @@ public class Maze{
 	    Scanner b = new Scanner(file);
 	    String values = b.nextLine();
 	    int a = values.length();
-	    int[][] moveBank = new int[2][4];
+	    // int[][] moveBank = new int[2][4];
 	    int[] x = {-1 , 0 , 0 ,1};
 	    int[] y ={0, -1 , 1 , 0};
-	    moveBank[0] = x;
-	    moveBank[1] = y;
+	    moveX = x;
+	    moveY = y;
 	    
 	    
 			    
@@ -90,10 +91,10 @@ public class Maze{
 	String dump = "";
 	for(int counter = 0; counter < maze.length; counter++ )
 	    {
-		System.out.println("Woot");
+		//System.out.println("Woot");
 		for(int stepper = 0; stepper < maze[0].length; stepper++)
 		    {
-			System.out.println("Whoot");
+			//	System.out.println("Whoot");
 			dump += maze[counter][stepper];
 			dump += " ";
 		    }
@@ -132,7 +133,9 @@ public class Maze{
       Since the constructor exits when the file is not found or is missing an E or S, we can assume it exists.
     */
     public int solve(){ 
-	
+	int SCol = 0;
+	int SRow = 0;
+
 	System.out.println("Yo");
 	for( int counter =  0; counter < maze.length; counter++ ) 
 	    {
@@ -157,14 +160,15 @@ public class Maze{
 	    {
 		return count; 
 	    }
-	
-	for(int counter = 0 ; counter < moveBank[0].length; counter++ ) 
-	    {
+	maze[row][col] = '@';
+	System.out.println(toString());
+	for(int counter = 0 ; counter < 4; counter++ ) 
+	    {	
 		try {
-		    if(maze[row + moveBank[0][counter]][col + moveBank[1][counter]] == ' ' || maze[row + moveBank[0][counter]][col + moveBank[1][counter]] == 'E')
+		    if(maze[row + moveX[counter]][col + moveY[counter]] == ' ' || maze[row + moveX[counter]][col + moveY[counter]] == 'E')
 			{
-			    maze[row][col] = '@';
-			    int temporary = solveH(col + moveBank[1][counter], row + moveBank[0][counter] , count + 1);
+			   
+			    int temporary = solveH(col + moveY[counter], row + moveX[counter] , count + 1);
 			    
 			    if(temporary != -1)
 				{
@@ -176,9 +180,22 @@ public class Maze{
 		catch(IndexOutOfBoundsException e)
 		    {}
 	    }
+	for(int counter =  0; counter < 4; counter++ ) 
+	    {
+		if(maze[row + moveX[counter]][col + moveY[counter]] == '@')
+		    {
+			maze[row][col] = '.';
+			maze[row + moveX[counter]][col + moveY[counter]] = ' ';
+			return solveH(row + moveX[counter] , col + moveY[counter] , count - 1);
+		    }
+	    }
+
+	
 	return -1;
-    }
-	   
+    
+	
+    }	  
+ 
     
 	
 			
