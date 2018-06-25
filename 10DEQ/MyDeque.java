@@ -66,7 +66,7 @@ public class MyDeque<E> {
         if(first == 0 && isFull() == false)
 	    {
 		data[length - 1] = thing;
-		first = length; 
+		first = length - 1; 
 	    }
 	else if(isFull() == false)
 	    {
@@ -299,59 +299,41 @@ public class MyDeque<E> {
 
 
 
+     public static void main(String[] args) {
+	MyDeque<String> a = new MyDeque<>();
 
+	System.out.println(a.toString());
 
+        a.addFirst("foo");
+	System.out.println(a.toString());
+        a.addFirst("do");
+	System.out.println(a.toString());
+	a.addLast("end");
+	a.addLast("first");
 
-    public static void main(String[] args)
-    {
-	MyDeque a = new MyDeque(5);
-	a.addFirst(3);
 	System.out.println(a.toString());
-	a.addFirst(4);
-	System.out.println(a.toString ());
-	a.addFirst(5);
-	System.out.println(a.toString());
-	//a.removeFirst();
-	//System.out.println(a.first);
-	//System.out.println(a.toString());
-	//a.resize();
-	//System.out.println(a.toString());
-	a.addFirst(6);
-	System.out.println(a.toString());
-	a.addFirst(7);
-	System.out.println(a.toString());
-	a.addFirst(8);
-	System.out.println(a.toString());
+	
 	System.out.println(a.getFirst());
 	System.out.println(a.getLast());
-	//a.resize();
-	//y	a.addFirst(8);
+
+	a.addLast("def");
+	a.addLast("gab");
+	a.addLast("leo");
+	a.addLast("fas");
+	a.addLast("der");
 	System.out.println(a.toString());
-	//a.addFirst(9);
-	//System.out.println(a.toString());
-	//	a.resize();
-	//System.out.println(a.toString());
-	//a.checkresize();
-	//System.out.println(a.toString());
-    
-	       
+	//should reisze
+	a.addLast("edd");
+
+	System.out.println(a.toString());
+
+	System.out.println(a.removeLast());
+	System.out.println(a.toString());
+
+	System.out.println(a.removeFirst());
+	System.out.println(a.toString());
     }
 }
-		   
-    
-    
-    /*@SuppressWarnings("unchecked")
-    /*public void resize()
-    {
-	data = (E[])new Object[length * 2];
-	///length = length * 2;
-	for(int counter = 0; counter <= length; counter++)
-	    {
-		
-	    
     
 
-    
-    
-	    }*/
-    
+   
