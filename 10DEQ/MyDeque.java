@@ -28,8 +28,8 @@ public class MyDeque<E> {
     {
 	data = (E[])new Object[10];
 	length = 10;
-	first = 0;
-	last = 10;
+	//first = 0; 
+	//last = 9; 
 	
 	
     }
@@ -51,29 +51,38 @@ public class MyDeque<E> {
 	    {
 		throw new IllegalArgumentException();
 	    }
+
+	
 	if(isFull() == true)
 	    {
-		System.out.println("HELP");
+		//System.out.println("HELP");
 
 		checkresize();
 
-		resize();
-		System.out.println(this);
+		//resize();
+		//System.out.println(this);
 
 	    }
-	   
+	   if(numberOfElements() == 0 )
+	    {	 
+		data[0] = thing;
+		first = 0;
+		last = 0; 
+		
+	    }
+    
 	
-        if(first == 0 && isFull() == false)
-	    {
+	   else if(first == 0)
+	       {
 		data[length - 1] = thing;
 		first = length - 1; 
-	    }
-	else if(isFull() == false)
-	    {
+	       }
+	   else if(isFull() == false)
+	       {
 		data[first - 1] = thing;
 		first = first - 1;
-	    }
-
+	       }
+	   
     }
 
     public void addLast(E thing)
@@ -82,12 +91,23 @@ public class MyDeque<E> {
 	    {
 		throw new IllegalArgumentException();
 	    }
+
 	if(isFull() == true)
 	    {
 		checkresize();
+		//resize();
+		
 	    }
+	if( numberOfElements() == 0 ) 
+	    {
+		data[0] = thing;
+		first = 0; 
+		last = 0 ;
+		
+	    }
+		
 	
-	if(last == length && isFull() == false)
+	else if(last == length - 1 && isFull() == false)
 	    {
 		data[0] = thing;
 		last = 0; 
@@ -112,6 +132,7 @@ public class MyDeque<E> {
 		data[first] = null;
 		first = 0; 
 	    }
+	
 	else
 	    {
 		temp = data[first];
@@ -151,7 +172,7 @@ public class MyDeque<E> {
 	    }
 	else
 	    {
-		return data[first - 1];
+		return data[first];
 	    }
     }
     
@@ -163,7 +184,7 @@ public class MyDeque<E> {
 	    }
 	else
 	    {
-		return data[last - 1];
+		return data[last];
 	    }
     }
 	     
@@ -180,9 +201,22 @@ public class MyDeque<E> {
 	return dump; 
     }
 
-
-
     @SuppressWarnings("unchecked")
+    public void resize() {
+	E[] temp = (E[])new Object[data.length * 2];
+
+	for (int counter = 0; counter < numberOfElements(); counter ++) {
+	    temp[counter] = data[(first + counter) % data.length];
+	}
+	
+	data = temp;
+	first = 0;
+	last = numberOfElements() - 1;
+	
+    }
+
+
+    /* @SuppressWarnings("unchecked")
     public void resize() 
     {
 	E[] temp = (E[])new Object[length * 2];
@@ -228,42 +262,48 @@ public class MyDeque<E> {
 	last = size - 1;
 	length = length * 2;
 	
-    }
+	}*/
 								
 		    
 		
-			
-
-
-
-
-
-
-
-
-
-	
-		
-		
-        
 	
 	
 		
 
 
+   public String toString(){
+	String ans = "[";
+	if(first < last){
+	    for (int i = first; i <= last; i++){
+		ans += data[i] + ", ";
+	    }
+	}
 
-    
-    public String toString() 
-    {
-	String dump = "[";
-	for(int counter = 0; counter < data.length; counter ++ )
+	else if(first == last) 
 	    {
-		dump += data[counter] ;
-		dump += " ";
-	    }					
-	return dump + "]";
+		for(int counter = first;counter < data.length; counter++)
+		    {
+			ans += data[counter] + ", ";
+		    }
+		for(int counter = 0; counter < last; counter ++ ) 
+		    {
+			ans += data[counter] + ", ";
+		    }
+	    }
+		
+	else{
+	    for(int i = first; i < data.length; i++){
+		ans += data[i] + ", ";
+	    }
+	    for(int i = 0; i <= last; i++){
+		ans += data[i] + ", ";
+	    }
+	}
+	ans = ans.substring(0, ans.length() - 2) + "]";
+	return ans;
     }
-
+    
+    
 	
 
 		
@@ -309,7 +349,9 @@ public class MyDeque<E> {
         a.addFirst("do");
 	System.out.println(a.toString());
 	a.addLast("end");
+	System.out.println(a.toString());
 	a.addLast("first");
+	
 
 	System.out.println(a.toString());
 	
